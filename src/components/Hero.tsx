@@ -70,7 +70,7 @@ export default function Hero() {
         <p>{t.hero.desc}</p>
         <div className={styles.descActions}>
           <a href="#work" className={styles.projectLogs}>{t.hero.logs}</a>
-          <a href="/Rodrigo_Horvilleur_CV.pdf" download className={styles.cvBtn}>
+          <a href="/Rodrigo_Horvilleur_CV.pdf" target="_blank" rel="noopener noreferrer" className={styles.cvBtn}>
             {t.hero.cv}
           </a>
         </div>

@@ -50,7 +50,7 @@ export default function Contact() {
               <a href="https://www.linkedin.com/in/rodrigo-horvilleur-b575b8338" target="_blank" rel="noreferrer" className={styles.link}>LINKEDIN</a>
               <a href="tel:+50660261200" className={styles.link}>PHONE</a>
             </div>
-            <a href="/Rodrigo_Horvilleur_CV.pdf" download className={styles.cvBtn}>
+            <a href="/Rodrigo_Horvilleur_CV.pdf" target="_blank" rel="noopener noreferrer" className={styles.cvBtn}>
               <span>{t.contact.cv}</span>
               <span>↓</span>
             </a>
