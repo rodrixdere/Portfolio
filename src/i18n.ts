@@ -117,7 +117,7 @@ export const translations: Record<Lang, Translations> = {
       p2: 'Mi stack incluye React, TypeScript, Node.js, Express y Spring Boot en el backend, con PostgreSQL, Supabase y MongoDB para datos. He lanzado una plataforma educativa para una fundación local, un e-commerce de equipos de gimnasio y el sitio corporativo de una marca de fitness.',
       p3: 'Inglés avanzado (C1+). Trabajo con Agile / Scrum y me importa la arquitectura limpia y los sistemas que funcionan bajo uso real.',
       stats: {
-        years: '2',
+        years: '2+',
         yearsLabel: 'Años construyendo',
         projects: '3',
         projectsLabel: 'Proyectos lanzados',
