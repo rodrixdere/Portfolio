@@ -1,0 +1,189 @@
+.contact {
+  background: #000;
+  padding: 80px var(--margin) 100px;
+  border-top: 0.5px solid #1a1a1a;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 40px;
+  letter-spacing: 3px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2px;
+  padding: 8px 0;
+  display: block;
+  border-bottom: 0.5px solid #1a1a1a;
+  transition: opacity 0.2s, padding-left 0.2s;
+  line-height: 1.2;
+}
+.link:first-child { border-top: 0.5px solid #1a1a1a; }
+.link:hover { opacity: 0.5; padding-left: 6px; }
+
+.cvBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  border: 0.5px solid #333;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #fff;
+  text-transform: uppercase;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  margin-top: 24px;
+}
+.cvBtn:hover { background: #fff; color: #000; border-color: #fff; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field { border-bottom: 0.5px solid #222; }
+
+.input,
+.textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #fff;
+  padding: 20px 0;
+  resize: none;
+}
+
+.input::placeholder,
+.textarea::placeholder { color: #444; }
+
+.textarea { min-height: 100px; }
+
+.btn {
+  margin-top: 32px;
+  width: 100%;
+  padding: 20px 28px;
+  background: #fff;
+  color: #000;
+  border: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: none;
+  transition: background 0.2s, opacity 0.2s;
+}
+.btn:hover { background: #e8e8e8; }
+.btn:disabled { opacity: 0.5; }
+.btnArrow { font-size: 20px; font-weight: 400; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .link {
+    font-size: clamp(28px, 6vw, 44px);
+  }
+}
+
+@media (max-width: 600px) {
+  .contact {
+    padding: 60px var(--margin) 80px;
+  }
+
+  .grid { gap: 40px; }
+
+  .heading {
+    font-size: clamp(32px, 9vw, 52px);
+    margin-bottom: 28px;
+  }
+
+  .link {
+    font-size: clamp(26px, 7vw, 36px);
+    padding: 10px 0;
+  }
+
+  .btn {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+}
+
+/* ── EMAIL STATUS STATES ── */
+.btnSuccess {
+  background: #22c55e;
+  color: #000;
+}
+.btnSuccess:hover { background: #16a34a; }
+
+.btnError {
+  background: #ef4444;
+  color: #fff;
+}
+.btnError:hover { background: #dc2626; }
+
+.resetBtn {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #555;
+  background: transparent;
+  border: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+  cursor: none;
+  padding: 0;
+}
+.resetBtn:hover { color: #fff; }
+
+/* Disabled inputs while sending */
+.input:disabled,
+.textarea:disabled {
+  opacity: 0.5;
+}

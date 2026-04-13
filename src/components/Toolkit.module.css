@@ -1,0 +1,136 @@
+.toolkit {
+  background: #0a0a0a;
+  padding: 48px var(--margin) 80px;
+  border-top: 0.5px solid #111;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #555;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-left: 0.5px solid #222;
+  border-top: 0.5px solid #222;
+}
+
+.group {
+  padding: 40px 48px;
+  border-right: 0.5px solid #222;
+  border-bottom: 0.5px solid #222;
+  min-width: 0;
+}
+
+.groupTitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #aaa;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.item:hover { opacity: 1; }
+
+.iconWrap {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #c8c8c8;
+}
+
+.iconSvg { width: 100%; height: 100%; }
+
+.itemName {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #c0c0c0;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item:hover .itemName { color: #fff; }
+.item:hover .iconWrap { color: #fff; }
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+    border-top: none;
+  }
+
+  .group {
+    padding: 32px 0;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 0.5px solid #222;
+  }
+
+  .group:first-child {
+    border-top: 0.5px solid #222;
+  }
+
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 24px;
+  }
+}
+
+@media (max-width: 500px) {
+  .toolkit {
+    /* Sin min-height en móvil — la sección crece con el contenido */
+    min-height: unset;
+    padding: 40px var(--margin) 60px;
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .itemName {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+}
