@@ -15,14 +15,14 @@ const REPEL_RADIUS = 120
 const REPEL_FORCE = 10
 const SPRING = 0.06
 const FRICTION = 0.78
-const MAX_PARTICLES = 6000  // Límite duro — evita lag en pantallas 4K
+const MAX_PARTICLES = 10000
 
 export default function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouse = useRef({ x: -9999, y: -9999 })
   const particles = useRef<Particle[]>([])
   const rafRef = useRef<number>(0)
-  const isVisible = useRef(true)  // Pausa cuando el tab está en segundo plano
+  const isVisible = useRef(true)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -45,7 +45,6 @@ export default function ParticleCanvas() {
 
       img.onload = () => spawnFromImage(img, W, H)
       img.onerror = () => {
-        // Fallback: dot-grid con densidad controlada
         const STEP = 10
         for (let y = STEP; y < H; y += STEP) {
           for (let x = STEP; x < W; x += STEP) {
@@ -66,8 +65,8 @@ export default function ParticleCanvas() {
     }
 
     function spawnFromImage(img: HTMLImageElement, W: number, H: number) {
-      // Escalar resolución del offscreen canvas para reducir píxeles procesados
-      const SCALE = Math.min(1, 800 / Math.max(W, H))
+      // Subir SCALE para tener más píxeles disponibles para muestrear
+      const SCALE = Math.min(1, 1200 / Math.max(W, H))
       const offW = Math.floor(W * SCALE)
       const offH = Math.floor(H * SCALE)
 
@@ -87,7 +86,9 @@ export default function ParticleCanvas() {
 
       oc.drawImage(img, drawX, drawY, drawW, drawH)
       const data = oc.getImageData(0, 0, offW, offH).data
-      const STEP = Math.max(4, Math.round(offW / 160))  // Paso mínimo más grande
+
+      // STEP 3 = muestrea más píxeles = más partículas posibles
+      const STEP = 3
 
       for (let y = 0; y < offH; y += STEP) {
         if (particles.current.length >= MAX_PARTICLES) break
@@ -96,7 +97,6 @@ export default function ParticleCanvas() {
           const i = (y * offW + x) * 4
           const brightness = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114
           if (brightness > 28 && Math.random() < 0.65) {
-            // Convertir coordenadas del offscreen al canvas real
             const rx = (x / offW) * W
             const ry = (y / offH) * H
             const jx = rx + (Math.random() - 0.5) * (STEP / SCALE) * 0.8
@@ -107,7 +107,8 @@ export default function ParticleCanvas() {
               y: jy + (Math.random() - 0.5) * H * 0.6,
               vx: 0, vy: 0,
               r: Math.max(0.4, (brightness / 255) * 1.6),
-              alpha: 0.2 + (brightness / 255) * 0.7,
+              // Alpha cuantizado a 10 niveles para batching eficiente
+              alpha: Math.round((0.2 + (brightness / 255) * 0.7) * 10) / 10,
             })
           }
         }
@@ -125,6 +126,7 @@ export default function ParticleCanvas() {
       const mx = mouse.current.x
       const my = mouse.current.y
 
+      // 1. Física
       for (let i = 0; i < pts.length; i++) {
         const p = pts[i]
         const dx = mx - p.x
@@ -143,10 +145,24 @@ export default function ParticleCanvas() {
         p.vy *= FRICTION
         p.x += p.vx
         p.y += p.vy
+      }
 
-        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`
+      // 2. Batched render — agrupa por alpha, ~10 draw calls en vez de N
+      const buckets = new Map<number, Particle[]>()
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i]
+        if (!buckets.has(p.alpha)) buckets.set(p.alpha, [])
+        buckets.get(p.alpha)!.push(p)
+      }
+
+      for (const [alpha, group] of buckets) {
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        for (let i = 0; i < group.length; i++) {
+          const p = group[i]
+          ctx.moveTo(p.x + p.r, p.y)
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        }
         ctx.fill()
       }
 
@@ -158,14 +174,12 @@ export default function ParticleCanvas() {
       mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
 
-    // Pausar animación cuando el tab no está visible — ahorra batería y CPU
     const onVisibilityChange = () => {
       isVisible.current = document.visibilityState === 'visible'
     }
 
     let resizeTimer: ReturnType<typeof setTimeout>
     const onResize = () => {
-      // Debounce del resize — evita reconstruir partículas en cada pixel de resize
       clearTimeout(resizeTimer)
       resizeTimer = setTimeout(() => {
         setSize()
