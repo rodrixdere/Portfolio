@@ -14,6 +14,9 @@ export default function Contact() {
     e.preventDefault()
     if (!formRef.current || status === 'sending') return
 
+    const honeypot = formRef.current.querySelector<HTMLInputElement>('input[name="honeypot"]')
+    if (honeypot?.value) return
+
     setStatus('sending')
     try {
       await emailjs.sendForm(
@@ -37,7 +40,7 @@ export default function Contact() {
     t.contact.send
 
   return (
-    <section className={styles.contact} id="contact">
+    <section className={styles.contact} id="contact" data-stack>
       <div className={styles.inner}>
         <span className={styles.label}>{t.contact.label}</span>
 
@@ -89,6 +92,16 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Honeypot - hidden from real users */}
+              <div style={{ display: 'none' }} aria-hidden="true">
+                <input
+                  type="text"
+                  name="honeypot"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <button
                 type="submit"
                 disabled={status === 'sending' || status === 'success'}
@@ -100,7 +113,6 @@ export default function Contact() {
                 </span>
               </button>
 
-              {/* Reset option after error */}
               {status === 'error' && (
                 <button
                   type="button"

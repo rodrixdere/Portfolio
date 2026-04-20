@@ -26,7 +26,7 @@ export default function FeaturedWork() {
   const { t } = useLang();
 
   return (
-    <section className={styles.work} id="work">
+    <section className={styles.work} id="work" data-stack>
       <div className={styles.inner}>
         <span className={styles.label}>{t.work.label}</span>
         <div className={styles.list}>
