@@ -20,6 +20,12 @@ const projects = [
     tags: "FRONTEND / REACT",
     url: "https://georgeangulofitness.com",
   },
+  {
+    num: "04",
+    name: "PYPMEDIACR",
+    tags: "FRONTEND / REACT & TYPESCRIPT",
+    url: "https://pypmedia.vercel.app/",
+  },
 ];
 
 export default function FeaturedWork() {
