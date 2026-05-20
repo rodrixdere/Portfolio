@@ -44,6 +44,10 @@ export interface Translations {
     sending: string
     success: string
     error: string
+    errorName: string
+    errorEmail: string
+    errorEmailInvalid: string
+    errorMessage: string
   }
 }
 
@@ -92,6 +96,10 @@ export const translations: Record<Lang, Translations> = {
       sending: 'SENDING...',
       success: 'MESSAGE SENT ✓',
       error: 'ERROR — TRY AGAIN',
+      errorName: 'Name is required',
+      errorEmail: 'Email is required',
+      errorEmailInvalid: 'Enter a valid email',
+      errorMessage: 'Message is required',
     },
   },
   es: {
@@ -138,6 +146,10 @@ export const translations: Record<Lang, Translations> = {
       sending: 'ENVIANDO...',
       success: 'MENSAJE ENVIADO ✓',
       error: 'ERROR — INTENTA DE NUEVO',
+      errorName: 'El nombre es requerido',
+      errorEmail: 'El correo es requerido',
+      errorEmailInvalid: 'Ingresa un correo válido',
+      errorMessage: 'El mensaje es requerido',
     },
   },
 }

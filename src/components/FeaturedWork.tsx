@@ -10,18 +10,12 @@ const projects = [
   },
   {
     num: "02",
-    name: "MUNDO FIT",
-    tags: "FRONTEND / REACT & TYPESCRIPT & CONTENTFUL",
-    url: "#",
-  },
-  {
-    num: "03",
     name: "GEORGE ANGULO FITNESS",
     tags: "FRONTEND / REACT",
     url: "https://georgeangulofitness.com",
   },
   {
-    num: "04",
+    num: "03",
     name: "PYPMEDIACR",
     tags: "FRONTEND / REACT & TYPESCRIPT",
     url: "https://pypmedia.vercel.app/",

@@ -5,10 +5,32 @@ import styles from './Contact.module.css'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
+interface FormErrors {
+  from_name?: string
+  reply_to?: string
+  message?: string
+}
+
 export default function Contact() {
   const { t } = useLang()
   const formRef = useRef<HTMLFormElement>(null)
   const [status, setStatus] = useState<Status>('idle')
+  const [errors, setErrors] = useState<FormErrors>({})
+
+  const validate = (form: HTMLFormElement): FormErrors => {
+    const name = (form.elements.namedItem('from_name') as HTMLInputElement).value.trim()
+    const email = (form.elements.namedItem('reply_to') as HTMLInputElement).value.trim()
+    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value.trim()
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    const errs: FormErrors = {}
+    if (!name) errs.from_name = t.contact.errorName
+    if (!email) errs.reply_to = t.contact.errorEmail
+    else if (!emailRegex.test(email)) errs.reply_to = t.contact.errorEmailInvalid
+    if (!message) errs.message = t.contact.errorMessage
+
+    return errs
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -17,7 +39,15 @@ export default function Contact() {
     const honeypot = formRef.current.querySelector<HTMLInputElement>('input[name="honeypot"]')
     if (honeypot?.value) return
 
+    const errs = validate(formRef.current)
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs)
+      return
+    }
+
+    setErrors({})
     setStatus('sending')
+
     try {
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -61,35 +91,43 @@ export default function Contact() {
 
           <div className={styles.right}>
             <form ref={formRef} onSubmit={handleSubmit} className={styles.form} noValidate>
-              <div className={styles.field}>
+              <div className={`${styles.field} ${errors.from_name ? styles.fieldInvalid : ''}`}>
                 <input
                   type="text"
                   name="from_name"
                   placeholder={t.contact.namePlaceholder}
-                  required
                   disabled={status === 'sending'}
                   className={styles.input}
                 />
+                {errors.from_name && (
+                  <span className={styles.fieldError}>{errors.from_name}</span>
+                )}
               </div>
-              <div className={styles.field}>
+
+              <div className={`${styles.field} ${errors.reply_to ? styles.fieldInvalid : ''}`}>
                 <input
                   type="email"
                   name="reply_to"
                   placeholder={t.contact.emailPlaceholder}
-                  required
                   disabled={status === 'sending'}
                   className={styles.input}
                 />
+                {errors.reply_to && (
+                  <span className={styles.fieldError}>{errors.reply_to}</span>
+                )}
               </div>
-              <div className={styles.field}>
+
+              <div className={`${styles.field} ${errors.message ? styles.fieldInvalid : ''}`}>
                 <textarea
                   name="message"
                   placeholder={t.contact.messagePlaceholder}
-                  required
                   rows={4}
                   disabled={status === 'sending'}
                   className={styles.textarea}
                 />
+                {errors.message && (
+                  <span className={styles.fieldError}>{errors.message}</span>
+                )}
               </div>
 
               {/* Honeypot - hidden from real users */}

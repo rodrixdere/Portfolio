@@ -187,3 +187,18 @@
 .textarea:disabled {
   opacity: 0.5;
 }
+
+/* ── VALIDATION ERRORS ── */
+.fieldError {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #ef4444;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  padding: 6px 0 10px;
+}
+
+.field.fieldInvalid {
+  border-bottom-color: #ef4444;
+}
