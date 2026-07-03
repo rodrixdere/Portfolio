@@ -1,0 +1,314 @@
+.work {
+  background: #000;
+  border-top: 0.5px solid #1a1a1a;
+  min-height: 100svh;
+  /* Sin padding — los proyectos son full-bleed para el efecto bookmark */
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 0.15em;
+  display: block;
+  padding: 28px var(--margin) 16px;
+}
+
+/* ── PROYECTO = SECCIÓN STICKY ──
+   Cada proyecto se fija a top = i × altura del bookmark: cuando el
+   siguiente sube, el anterior queda reducido a su barra de nombre */
+.project {
+  --bookmark-h: 44px;
+  position: sticky;
+  top: calc(var(--i) * var(--bookmark-h));
+  min-height: calc(100svh - var(--i) * var(--bookmark-h));
+  display: flex;
+  flex-direction: column;
+  background: #000; /* opaco: debe tapar al proyecto anterior */
+}
+
+/* ── BOOKMARK ── */
+.bookmark {
+  height: var(--bookmark-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 var(--margin);
+  background: #000;
+  border-top: 0.5px solid #1a1a1a;
+  border-bottom: 0.5px solid #1a1a1a;
+}
+
+.bookmarkNum {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 0.05em;
+}
+
+.bookmarkName {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+/* ── CUERPO DEL PROYECTO ── */
+.projectBody {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  padding: 40px var(--margin) 56px;
+}
+
+/* ── INFO (izquierda) ── */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(36px, 4.5vw, 72px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 0.95;
+  margin-bottom: 24px;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.1vw, 15px);
+  color: #888;
+  line-height: 1.9;
+  max-width: 46ch;
+  margin-bottom: 28px;
+}
+
+.tags {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── CARD (derecha) — ventana de navegador minimalista ── */
+.card {
+  display: block;
+  width: 100%;
+  background: #0a0a0a;
+  border: 0.5px solid #2a2a2a;
+  cursor: none;
+  transition: border-color 0.3s, transform 0.3s ease;
+}
+
+.card:hover {
+  border-color: #555;
+  transform: translateY(-4px);
+}
+
+/* Barra superior estilo navegador */
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 36px;
+  padding: 0 14px;
+  border-bottom: 0.5px solid #1a1a1a;
+  background: #050505;
+}
+
+.chromeDots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.chromeDots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 0.5px solid #3a3a3a;
+}
+
+.chromeUrl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chromeLive {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+}
+
+/* Mismo dot verde pulsante que el "AVAILABLE" del hero */
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Área de la preview */
+.viewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+/* Vista previa del sitio real, escalada desde resolución desktop.
+   El contenido va en color: la capa .bw lo pasa a blanco y negro */
+.frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  border: none;
+  pointer-events: none; /* la card entera es el link; el lente sigue al mouse */
+}
+
+/* Screenshot estático (fallback cuando el sitio no se puede embeber) */
+.shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Capa blanco y negro sobre toda la preview. El clip-path inline
+   le abre un agujero circular en el mouse donde se ve el color real */
+.bw {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  -webkit-backdrop-filter: grayscale(1) brightness(0.88);
+  backdrop-filter: grayscale(1) brightness(0.88);
+}
+
+/* Aro que delimita el lente de color */
+.lensRing {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Fondo tipográfico mientras el iframe carga */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: clamp(20px, 3vw, 36px);
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, #161616 39px, #161616 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, #161616 39px, #161616 40px),
+    #0d0d0d;
+}
+
+.phNum {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #555;
+  letter-spacing: 0.1em;
+}
+
+.phName {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 0.95;
+}
+
+.phTags {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Flecha cuadrada — mismo lenguaje que el botón de CV */
+.cardArrow {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: transform 0.25s ease;
+}
+
+.card:hover .cardArrow { transform: translate(2px, -2px); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .projectBody {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+    padding: 32px var(--margin) 48px;
+  }
+
+  .name {
+    font-size: clamp(32px, 8vw, 56px);
+    margin-bottom: 16px;
+  }
+
+  .desc { margin-bottom: 20px; }
+}
+
+@media (max-width: 600px) {
+  .project { --bookmark-h: 38px; }
+
+  .bookmarkName {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+
+  .name {
+    font-size: clamp(28px, 9vw, 44px);
+    letter-spacing: 1px;
+  }
+}
