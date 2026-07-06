@@ -43,11 +43,15 @@ export function useMagneticCursor() {
         const rect = stuckEl.getBoundingClientRect()
         const cx = rect.left + rect.width / 2
         const cy = rect.top + rect.height / 2
-        const dx = x - cx
-        const dy = y - cy
 
-        setX(cx + dx * 0.35)
-        setY(cy + dy * 0.35)
+        // El punto nunca abandona el mouse: atraerlo al centro del elemento
+        // solo funciona con targets chicos, no con h2 de ancho completo
+        setX(x - 3)
+        setY(y - 3)
+
+        // Mantener el lag del aro actualizado para que no salte al soltar el título
+        pos.x += (x - pos.x) * 0.12
+        pos.y += (y - pos.y) * 0.12
 
         gsap.to(follower, {
           x: cx - 60,
