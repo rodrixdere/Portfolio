@@ -196,7 +196,7 @@ const packs: Pack[] = [
   {
     tag: "MENSUAL",
     name: "MANTENIMIENTO + HOSTING",
-    price: "desde ₡30.000",
+    price: "desde ₡20.000",
     priceNote: "por mes",
     features: [
       "Hosting, dominio y seguridad administrados",
