@@ -33,19 +33,19 @@ const sites: Site[] = [
     num: "01",
     name: "GEORGE ANGULO FITNESS",
     url: "https://georgeangulofitness.com",
-    desc: "Marca de fitness — sus programas, servicios y contacto directo de clientes, todo desde el celular.",
+    desc: "Marca de fitness: sus programas, servicios y contacto directo de clientes, todo desde el celular.",
   },
   {
     num: "02",
     name: "PYP MEDIA",
     url: "https://pypmedia.vercel.app/",
-    desc: "Productora audiovisual — muestra su trabajo y recibe consultas de nuevos proyectos.",
+    desc: "Productora audiovisual: muestra su trabajo y recibe consultas de nuevos proyectos.",
   },
   {
     num: "03",
     name: "AULA JOVEN",
     url: "https://aulajoven.org",
-    desc: "Fundación educativa — cursos y matrícula de estudiantes completamente en línea.",
+    desc: "Fundación educativa: cursos y matrícula de estudiantes completamente en línea.",
   },
 ];
 
@@ -75,7 +75,7 @@ function SiteCard({ site }: { site: Site }) {
       target="_blank"
       rel="noreferrer"
       className={styles.siteCard}
-      aria-label={`${site.name} — abrir sitio en una pestaña nueva`}
+      aria-label={`${site.name}: abrir sitio en una pestaña nueva`}
     >
       <div className={styles.chrome} aria-hidden="true">
         <span className={styles.chromeDots}>
@@ -93,7 +93,7 @@ function SiteCard({ site }: { site: Site }) {
         {scale > 0 && (
           <iframe
             src={site.url}
-            title={`${site.name} — vista previa`}
+            title={`${site.name} · vista previa`}
             className={styles.frame}
             style={{
               width: PREVIEW_W,
@@ -144,6 +144,7 @@ interface Pack {
   name: string;
   price: string;
   priceNote: string;
+  monthly?: string;
   features: string[];
   time: string;
   featured?: boolean;
@@ -153,13 +154,14 @@ const packs: Pack[] = [
   {
     tag: "BÁSICO",
     name: "PRESENCIA",
-    price: "desde ₡150.000",
+    price: "desde ₡200.000",
     priceNote: "pago único",
+    monthly: "+ ₡20.000/mes · hosting y dominio",
     features: [
       "Una página profesional con tu info, fotos y servicios",
       "Botón directo a tu WhatsApp",
       "Mapa, horarios y redes sociales",
-      "Tu propio dominio (.com) y hosting incluidos",
+      "Tu propio dominio (.com), a tu nombre",
       "Perfecta en celular",
     ],
     time: "Lista en días",
@@ -167,8 +169,9 @@ const packs: Pack[] = [
   {
     tag: "PROFESIONAL",
     name: "CAPTACIÓN",
-    price: "desde ₡300.000",
-    priceNote: "pago único",
+    price: "a cotización",
+    priceNote: "precio fijo, sin sorpresas",
+    monthly: "+ ₡20.000/mes · hosting y dominio",
     features: [
       "Todo lo del plan Básico",
       "Varias secciones: catálogo, menú, precios, galería",
@@ -181,8 +184,9 @@ const packs: Pack[] = [
   {
     tag: "PREMIUM",
     name: "SISTEMA DE RESERVAS",
-    price: "desde ₡650.000",
-    priceNote: "según el proyecto",
+    price: "a cotización",
+    priceNote: "a tu medida",
+    monthly: "+ plan mensual · se cotiza con el proyecto",
     features: [
       "Todo lo del plan Profesional",
       "Tus clientes agendan cita solos, 24/7",
@@ -196,15 +200,38 @@ const packs: Pack[] = [
   {
     tag: "MENSUAL",
     name: "MANTENIMIENTO + HOSTING",
-    price: "desde ₡20.000",
-    priceNote: "por mes",
+    price: "₡20.000",
+    priceNote: "por mes · va con todos los planes",
     features: [
-      "Hosting, dominio y seguridad administrados",
+      "Mantiene tu sitio en línea, 24/7",
+      "Hosting, seguridad y renovación del dominio",
       "Respaldos de tu sitio",
-      "Cambios menores incluidos",
+      "Cambios menores incluidos (textos, precios, fotos)",
       "Soporte directo conmigo",
+      "Sistemas a la medida (Premium) se cotizan aparte",
     ],
     time: "Tranquilidad todos los meses",
+  },
+];
+
+/* ── Sin letra chiquita ── */
+
+const finePrint = [
+  {
+    title: "PAGO ÚNICO",
+    desc: "Cubre la construcción de tu sitio, de cero a en línea.",
+  },
+  {
+    title: "PLAN MENSUAL · ₡20.000",
+    desc: "Todo lo que lo mantiene funcionando: hosting, seguridad y la renovación anual del dominio.",
+  },
+  {
+    title: "PRECIO FIJO POR ESCRITO",
+    desc: "Las cotizaciones quedan fijas antes de arrancar. Demo gratis antes de pagar nada; 50% de adelanto y 50% contra entrega.",
+  },
+  {
+    title: "EL DOMINIO ES TUYO",
+    desc: "Si algún día decidís no seguir con el plan mensual, te lo llevás.",
   },
 ];
 
@@ -229,7 +256,7 @@ const steps = [
   {
     num: "04",
     title: "PUBLICAMOS Y TE ACOMPAÑO",
-    desc: "Tu sitio en línea con tu dominio. Mantenimiento mensual opcional.",
+    desc: "Tu sitio en línea con tu dominio. El plan mensual (₡20.000) lo mantiene funcionando y me tenés para lo que necesités.",
   },
 ];
 
@@ -241,12 +268,12 @@ const reasons = [
     desc: "Soy desarrollador profesional: tu sitio carga rápido, funciona bien y se ajusta exactamente a tu negocio.",
   },
   {
-    title: "TODO INCLUIDO",
-    desc: "Dominio propio, hosting, seguridad y correo profesional. No tenés que contratar nada aparte.",
+    title: "TODO GESTIONADO",
+    desc: "Dominio, hosting, seguridad y correo profesional gestionados por mí en un plan mensual. Todo en un solo lugar, sin proveedores aparte.",
   },
   {
     title: "EL SITIO ES TUYO",
-    desc: "Sin plataformas con mensualidad obligatoria. Tu sitio te pertenece — es un activo de tu negocio.",
+    desc: "Nada de plataformas alquiladas: tu sitio y tu dominio te pertenecen. Son un activo de tu negocio.",
   },
   {
     title: "TRATO DIRECTO",
@@ -257,7 +284,7 @@ const reasons = [
 export default function Services() {
   useEffect(() => {
     document.documentElement.lang = "es";
-    document.title = "Sitios web para tu negocio en Costa Rica — Rodrigo Horvilleur";
+    document.title = "Sitios web para tu negocio en Costa Rica | Rodrigo Horvilleur";
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute(
@@ -369,6 +396,9 @@ export default function Services() {
                 <div className={styles.packPrice}>
                   {p.price}
                   <span className={styles.packPriceNote}> · {p.priceNote}</span>
+                  {p.monthly && (
+                    <span className={styles.packMonthly}>{p.monthly}</span>
+                  )}
                 </div>
                 <ul className={styles.packFeatures}>
                   {p.features.map((f) => (
@@ -389,11 +419,17 @@ export default function Services() {
               </div>
             ))}
           </div>
-          <p className={styles.packsNote}>
-            Precios de referencia — cada negocio es distinto. Escribime y te doy
-            un precio fijo sin compromiso. Se trabaja con 50% de adelanto y 50%
-            contra entrega.
-          </p>
+          <div className={styles.fineprint}>
+            <span className={styles.fineprintLabel}>SIN LETRA CHIQUITA</span>
+            <div className={styles.fineprintGrid}>
+              {finePrint.map((f) => (
+                <div key={f.title} className={styles.fineprintItem}>
+                  <span className={styles.fineprintTitle}>{f.title}</span>
+                  <p className={styles.fineprintDesc}>{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* ── PROCESO ── */}
