@@ -93,11 +93,13 @@
 
 .statNum {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(40px, 5vw, 80px);
+  font-size: clamp(26px, 3vw, 52px);
   font-weight: 900;
   color: #000;
   line-height: 1;
   display: block;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .statLabel {

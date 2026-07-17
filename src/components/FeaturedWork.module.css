@@ -21,7 +21,11 @@
   --bookmark-h: 44px;
   position: sticky;
   top: calc(var(--i) * var(--bookmark-h));
-  min-height: calc(100svh - var(--i) * var(--bookmark-h));
+  /* lvh (viewport con la barra del navegador colapsada): con svh, al
+     scrollear en móvil el viewport crece y el proyecto anterior se
+     asomaba por abajo del que lo tapa */
+  min-height: calc(100vh - var(--i) * var(--bookmark-h));
+  min-height: calc(100lvh - var(--i) * var(--bookmark-h));
   display: flex;
   flex-direction: column;
   background: #000; /* opaco: debe tapar al proyecto anterior */
@@ -212,6 +216,20 @@
   pointer-events: none;
   -webkit-backdrop-filter: grayscale(1) brightness(0.88);
   backdrop-filter: grayscale(1) brightness(0.88);
+}
+
+/* En táctil no hay lente: la card gana su color al entrar en pantalla */
+@media (hover: none) and (pointer: coarse) {
+  .bw {
+    transition:
+      -webkit-backdrop-filter 0.9s ease,
+      backdrop-filter 0.9s ease;
+  }
+
+  .bwOff {
+    -webkit-backdrop-filter: grayscale(0) brightness(1);
+    backdrop-filter: grayscale(0) brightness(1);
+  }
 }
 
 /* Aro que delimita el lente de color */

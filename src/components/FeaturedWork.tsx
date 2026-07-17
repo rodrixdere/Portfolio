@@ -81,6 +81,25 @@ function ProjectCard({ project, lang }: { project: Project; lang: Lang }) {
     return () => ro.disconnect();
   }, []);
 
+  // En dispositivos táctiles no hay lente (no hay mouse): la card gana su
+  // color cuando entra en pantalla, con una transición CSS. Se usa
+  // IntersectionObserver (no scroll por frame) para que el scroll rápido
+  // no recalcule el backdrop-filter constantemente.
+  const [colored, setColored] = useState(false);
+  useEffect(() => {
+    if (!window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
+    const el = vpRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setColored(entry.isIntersecting),
+      // Se activa cuando ~40% de la card es visible; al salir vuelve a B/N
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const onMouseMove = (e: MouseEvent) => {
     const rect = vpRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -164,7 +183,7 @@ function ProjectCard({ project, lang }: { project: Project; lang: Lang }) {
 
         {/* Capa blanco y negro — el agujero del clip muestra el color real */}
         <span
-          className={styles.bw}
+          className={`${styles.bw} ${colored ? styles.bwOff : ""}`}
           aria-hidden="true"
           style={{ clipPath: bwClip }}
         />

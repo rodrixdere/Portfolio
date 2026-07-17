@@ -52,18 +52,12 @@ export default function About() {
         </div>
 
         <div className={styles.stats}>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>{t.about.stats.years}</span>
-            <span className={styles.statLabel}>{t.about.stats.yearsLabel}</span>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>{t.about.stats.projects}</span>
-            <span className={styles.statLabel}>{t.about.stats.projectsLabel}</span>
-          </div>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>{t.about.stats.english}</span>
-            <span className={styles.statLabel}>{t.about.stats.englishLabel}</span>
-          </div>
+          {t.about.pillars.map((p) => (
+            <div key={p.big} className={styles.stat}>
+              <span className={styles.statNum}>{p.big}</span>
+              <span className={styles.statLabel}>{p.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

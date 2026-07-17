@@ -26,14 +26,7 @@ export interface Translations {
     p1: string
     p2: string
     p3: string
-    stats: {
-      years: string
-      yearsLabel: string
-      projects: string
-      projectsLabel: string
-      english: string
-      englishLabel: string
-    }
+    pillars: { big: string; label: string }[]
   }
   toolkit: { label: string }
   work: { label: string }
@@ -59,7 +52,7 @@ export interface Translations {
 export const translations: Record<Lang, Translations> = {
   en: {
     meta: {
-      title: 'Rodrigo Horvilleur — Full-Stack Developer',
+      title: 'Rodrigo Horvilleur | Full-Stack Developer',
       description: 'Full-Stack Developer based in Costa Rica. Building complete web applications with React, TypeScript, Node.js, Spring Boot, and PostgreSQL.',
     },
     nav: {
@@ -80,17 +73,14 @@ export const translations: Record<Lang, Translations> = {
       label: '02 / ABOUT',
       hi: 'HI',
       there: 'THERE',
-      p1: "Full-Stack Developer and Software Engineering student at Universidad Latina de Costa Rica — finishing my degree. I build complete web applications end-to-end, from requirements gathering to production deployment.",
+      p1: "Full-Stack Developer and Software Engineering student at Universidad Latina de Costa Rica, finishing my degree. I build complete web applications end-to-end, from requirements gathering to production deployment.",
       p2: "My stack covers React, TypeScript, Node.js, Express, and Spring Boot on the backend, with PostgreSQL, Supabase, and MongoDB for data. I've shipped an educational platform for a local foundation, a gym equipment e-commerce site, and a fitness brand's corporate site.",
       p3: 'Advanced English (C1+). I work with Agile / Scrum and care about clean architecture and systems that hold up under real use.',
-      stats: {
-        years: '2+',
-        yearsLabel: 'Years building',
-        projects: '3',
-        projectsLabel: 'Projects shipped',
-        english: 'C1+',
-        englishLabel: 'English level',
-      },
+      pillars: [
+        { big: 'END-TO-END', label: 'From requirements to production' },
+        { big: 'IN PRODUCTION', label: 'Apps with real users today' },
+        { big: 'TEAM-READY', label: 'Agile, Scrum and code reviews' },
+      ],
     },
     toolkit: { label: '03 / TOOLKIT' },
     work: { label: '04 / FEATURED WORK' },
@@ -104,7 +94,7 @@ export const translations: Record<Lang, Translations> = {
       send: 'SEND MESSAGE',
       sending: 'SENDING...',
       success: 'MESSAGE SENT ✓',
-      error: 'ERROR — TRY AGAIN',
+      error: 'ERROR · TRY AGAIN',
       tryAgain: 'Try again',
       errorName: 'Name is required',
       errorEmail: 'Email is required',
@@ -114,7 +104,7 @@ export const translations: Record<Lang, Translations> = {
   },
   es: {
     meta: {
-      title: 'Rodrigo Horvilleur — Desarrollador Full-Stack',
+      title: 'Rodrigo Horvilleur | Desarrollador Full-Stack',
       description: 'Desarrollador Full-Stack basado en Costa Rica. Aplicaciones web completas con React, TypeScript, Node.js, Spring Boot y PostgreSQL.',
     },
     nav: {
@@ -135,17 +125,14 @@ export const translations: Record<Lang, Translations> = {
       label: '02 / SOBRE MÍ',
       hi: 'HO',
       there: 'LA',
-      p1: 'Desarrollador Full-Stack y estudiante de Ingeniería en Software en la Universidad Latina de Costa Rica — finalizando mi carrera. Construyo aplicaciones web completas de extremo a extremo, desde el levantamiento de requisitos hasta el despliegue en producción.',
+      p1: 'Desarrollador Full-Stack y estudiante de Ingeniería en Software en la Universidad Latina de Costa Rica, finalizando mi carrera. Construyo aplicaciones web completas de extremo a extremo, desde el levantamiento de requisitos hasta el despliegue en producción.',
       p2: 'Mi stack incluye React, TypeScript, Node.js, Express y Spring Boot en el backend, con PostgreSQL, Supabase y MongoDB para datos. He lanzado una plataforma educativa para una fundación local, un e-commerce de equipos de gimnasio y el sitio corporativo de una marca de fitness.',
       p3: 'Inglés avanzado (C1+). Trabajo con Agile / Scrum y me importa la arquitectura limpia y los sistemas que funcionan bajo uso real.',
-      stats: {
-        years: '2+',
-        yearsLabel: 'Años construyendo',
-        projects: '3',
-        projectsLabel: 'Proyectos lanzados',
-        english: 'C1+',
-        englishLabel: 'Nivel de inglés',
-      },
+      pillars: [
+        { big: 'END-TO-END', label: 'De requisitos a producción' },
+        { big: 'EN PRODUCCIÓN', label: 'Apps con usuarios reales hoy' },
+        { big: 'TRABAJO EN EQUIPO', label: 'Agile, Scrum y code reviews' },
+      ],
     },
     toolkit: { label: '03 / HERRAMIENTAS' },
     work: { label: '04 / PROYECTOS DESTACADOS' },
@@ -159,7 +146,7 @@ export const translations: Record<Lang, Translations> = {
       send: 'ENVIAR MENSAJE',
       sending: 'ENVIANDO...',
       success: 'MENSAJE ENVIADO ✓',
-      error: 'ERROR — INTENTA DE NUEVO',
+      error: 'ERROR · INTENTA DE NUEVO',
       tryAgain: 'Intentar de nuevo',
       errorName: 'El nombre es requerido',
       errorEmail: 'El correo es requerido',
