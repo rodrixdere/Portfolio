@@ -282,6 +282,8 @@ const reasons = [
 ];
 
 export default function Services() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     document.documentElement.lang = "es";
     document.title = "Sitios web para tu negocio en Costa Rica | Rodrigo Horvilleur";
@@ -311,7 +313,38 @@ export default function Services() {
                 WHATSAPP
               </a>
             </div>
+            <button
+              className={styles.hamburger}
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Abrir menú"
+              aria-expanded={menuOpen}
+            >
+              <span className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ""}`} />
+              <span className={`${styles.bar} ${menuOpen ? styles.barOpen2 : ""}`} />
+              <span className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ""}`} />
+            </button>
           </nav>
+
+          <div className={`${styles.dropdown} ${menuOpen ? styles.dropdownOpen : ""}`}>
+            <a href="#sitios" className={styles.dropdownLink} onClick={() => setMenuOpen(false)}>
+              SITIOS
+            </a>
+            <a href="#paquetes" className={styles.dropdownLink} onClick={() => setMenuOpen(false)}>
+              PAQUETES
+            </a>
+            <a href="#proceso" className={styles.dropdownLink} onClick={() => setMenuOpen(false)}>
+              PROCESO
+            </a>
+            <a
+              href={WA_GENERAL}
+              target="_blank"
+              rel="noreferrer"
+              className={`${styles.dropdownLink} ${styles.dropdownCta}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              WHATSAPP →
+            </a>
+          </div>
 
           <div className={styles.nameBlock}>
             <h1>
