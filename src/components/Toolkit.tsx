@@ -1,4 +1,5 @@
 import { useLang } from "../useLang";
+import Credentials from "./Credentials";
 import styles from "./Toolkit.module.css";
 
 const IconSvg = ({ children }: { children: React.ReactNode }) => (
@@ -9,6 +10,34 @@ const IconSvg = ({ children }: { children: React.ReactNode }) => (
   >
     {children}
   </svg>
+);
+
+/* Icono de texto para las marcas que se reconocen por su sigla (TS, JS, SQL) */
+const TextIcon = ({ label, size = 10 }: { label: string; size?: number }) => (
+  <IconSvg>
+    <rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor" opacity="0.25" />
+    <rect
+      x="2"
+      y="2"
+      width="20"
+      height="20"
+      rx="3"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+    />
+    <text
+      x="12"
+      y="16.5"
+      textAnchor="middle"
+      fontFamily="monospace"
+      fontWeight="900"
+      fontSize={size}
+      fill="currentColor"
+    >
+      {label}
+    </text>
+  </IconSvg>
 );
 
 const tools = [
@@ -54,77 +83,38 @@ const tools = [
         ),
       },
       {
-        name: "TypeScript",
+        name: "Next.js",
         icon: (
           <IconSvg>
-            <rect
-              x="2"
-              y="2"
-              width="20"
-              height="20"
-              rx="3"
-              fill="currentColor"
-              opacity="0.25"
-            />
-            <rect
-              x="2"
-              y="2"
-              width="20"
-              height="20"
-              rx="3"
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1.2"
+              strokeWidth="1.3"
             />
-            <text
-              x="4"
-              y="17.5"
-              fontFamily="monospace"
-              fontWeight="900"
-              fontSize="10"
-              fill="currentColor"
-            >
-              TS
-            </text>
+            <path
+              d="M8.5 16V8l7.5 9.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <line
+              x1="15.2"
+              y1="8"
+              x2="15.2"
+              y2="14"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
           </IconSvg>
         ),
       },
-      {
-        name: "JavaScript",
-        icon: (
-          <IconSvg>
-            <rect
-              x="2"
-              y="2"
-              width="20"
-              height="20"
-              rx="3"
-              fill="currentColor"
-              opacity="0.25"
-            />
-            <rect
-              x="2"
-              y="2"
-              width="20"
-              height="20"
-              rx="3"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.2"
-            />
-            <text
-              x="4"
-              y="17.5"
-              fontFamily="monospace"
-              fontWeight="900"
-              fontSize="10"
-              fill="currentColor"
-            >
-              JS
-            </text>
-          </IconSvg>
-        ),
-      },
+      { name: "TypeScript", icon: <TextIcon label="TS" /> },
+      { name: "JavaScript", icon: <TextIcon label="JS" /> },
       {
         name: "HTML",
         icon: (
@@ -159,30 +149,24 @@ const tools = [
         ),
       },
       {
-        name: "Bootstrap",
+        name: "GSAP",
         icon: (
-          <IconSvg>
-            <path
-              d="M5 2h14a3 3 0 013 3v14a3 3 0 01-3 3H5a3 3 0 01-3-3V5a3 3 0 013-3zm2 5v10h5.5a4 4 0 002.7-.9 3 3 0 001-2.3 2.7 2.7 0 00-.6-1.8A2.8 2.8 0 0014 11v-.1a2.5 2.5 0 001.3-2.2A2.7 2.7 0 0013.5 7H7zm2 4h3a1.5 1.5 0 010 3H9v-3zm0 5h3.5a1.5 1.5 0 010 3H9v-3z"
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            className={styles.iconSvg}
+          >
+            <text
+              x="1"
+              y="17"
+              fontFamily="monospace"
+              fontWeight="900"
+              fontSize="9"
               fill="currentColor"
-            />
-          </IconSvg>
-        ),
-      },
-      {
-        name: 'GSAP',
-        icon: (
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={styles.iconSvg}>
-            <text x="1" y="17" fontFamily="monospace" fontWeight="900" fontSize="9" fill="currentColor">GSAP</text>
+            >
+              GSAP
+            </text>
           </svg>
-        )
-      },
-      {
-        name: "Framer Motion",
-        icon: (
-          <IconSvg>
-            <path d="M4 4h16v8H12L4 4zm0 8h8l8 8H4v-8z" fill="currentColor" />
-          </IconSvg>
         ),
       },
     ],
@@ -217,39 +201,33 @@ const tools = [
         ),
       },
       {
-        name: "Spring Boot",
+        name: "Python",
         icon: (
           <IconSvg>
             <path
-              d="M20.2 7.4a9 9 0 11-12.9-3.2A9 9 0 0120.2 7.4zM6.2 3.2a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm14 1.5a1 1 0 100 2 1 1 0 000-2z"
+              d="M12 2.5c-2.8 0-4.5.8-4.5 2.6V8h5v1H6.2C4.4 9 3 10.3 3 13s1.3 4 3 4h1.5v-2.6c0-1.9 1.6-3.4 3.5-3.4h3.3c1.6 0 2.7-1.2 2.7-2.7V5.1c0-1.6-1.6-2.6-4-2.6zm-1.7 1.7a.9.9 0 110 1.8.9.9 0 010-1.8z"
+              fill="currentColor"
+            />
+            <path
+              d="M12 21.5c2.8 0 4.5-.8 4.5-2.6V16h-5v-1h6.3c1.8 0 3.2-1.3 3.2-4s-1.3-4-3-4h-1.5v2.6c0 1.9-1.6 3.4-3.5 3.4H9.7C8.1 13 7 14.2 7 15.7v3.2c0 1.6 1.6 2.6 4 2.6zm1.7-1.7a.9.9 0 110-1.8.9.9 0 010 1.8z"
               fill="currentColor"
             />
           </IconSvg>
         ),
       },
       {
-        name: "PHP",
+        name: "FastAPI",
         icon: (
           <IconSvg>
-            <ellipse
+            <circle
               cx="12"
               cy="12"
-              rx="10"
-              ry="6"
+              r="10"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.3"
             />
-            <text
-              x="5"
-              y="16"
-              fontFamily="monospace"
-              fontWeight="900"
-              fontSize="8"
-              fill="currentColor"
-            >
-              PHP
-            </text>
+            <path d="M12.8 4.5L7 13h4.2l-.6 6.5L17 11h-4.4l.2-6.5z" fill="currentColor" />
           </IconSvg>
         ),
       },
@@ -384,42 +362,20 @@ const tools = [
           </IconSvg>
         ),
       },
+    ],
+  },
+  {
+    key: "devops",
+    category: { en: "DEVOPS & INFRA", es: "DEVOPS & INFRA" },
+    items: [
       {
         name: "Docker",
         icon: (
           <IconSvg>
-            <rect
-              x="5"
-              y="9"
-              width="3"
-              height="3"
-              rx=".5"
-              fill="currentColor"
-            />
-            <rect
-              x="9"
-              y="9"
-              width="3"
-              height="3"
-              rx=".5"
-              fill="currentColor"
-            />
-            <rect
-              x="13"
-              y="9"
-              width="3"
-              height="3"
-              rx=".5"
-              fill="currentColor"
-            />
-            <rect
-              x="9"
-              y="5"
-              width="3"
-              height="3"
-              rx=".5"
-              fill="currentColor"
-            />
+            <rect x="5" y="9" width="3" height="3" rx=".5" fill="currentColor" />
+            <rect x="9" y="9" width="3" height="3" rx=".5" fill="currentColor" />
+            <rect x="13" y="9" width="3" height="3" rx=".5" fill="currentColor" />
+            <rect x="9" y="5" width="3" height="3" rx=".5" fill="currentColor" />
             <path
               d="M2 13c1-4 5-4 8-3 2-2 6-2 8 0 2 0 3 1 3 3-1 3-4 4-8 4H7c-3 0-5-1-5-4z"
               fill="none"
@@ -429,66 +385,78 @@ const tools = [
           </IconSvg>
         ),
       },
-    ],
-  },
-  {
-    key: "languages",
-    category: { en: "LANGUAGES & SYSTEMS", es: "LENGUAJES & SISTEMAS" },
-    items: [
       {
-        name: "Java",
+        name: "Linux",
         icon: (
           <IconSvg>
             <path
-              d="M8.5 17s-.8.5.6.6c1.7.2 2.5.2 4.4-.2 0 0 .5.3 1.2.6-4.1 1.7-9.3-.1-6.2-1zm-.5-2.3s-.9.7.5.8c1.7.2 3.1.2 5.4-.3 0 0 .3.4 1 .5-4.8 1.4-10.1.1-6.9-1zM12.2 10.6c1 1.1-.3 2.2-.3 2.2s2.4-1.3 1.3-2.8c-1-1.4-1.8-2.1 2.4-4.5 0 0-6.5 1.6-3.4 5.1zM13 2s2.2 2.2-2.1 5.6c-3.4 2.7-.8 4.2 0 5.9-2-1.8-3.4-3.4-2.5-4.8C9.8 6.8 13.9 5.7 13 2z"
-              fill="currentColor"
+              d="M12 2a5 5 0 014 2c1 1.5 1 3 .5 5-.5 1.5-1 3-.5 4.5.5 1.5 1 2 .5 3-.5 1-2 1.5-4.5 1.5S8 17.5 7.5 16.5c-.5-1 0-1.5.5-3s-.5-3-.5-4.5C7 7.5 7 5.5 8 4a5 5 0 014-2z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+            />
+            <circle cx="10" cy="9" r="1" fill="currentColor" />
+            <circle cx="14" cy="9" r="1" fill="currentColor" />
+            <path
+              d="M9 13.5s1 1.5 3 1.5 3-1.5 3-1.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+            />
+            <path
+              d="M8 19l-2 2M16 19l2 2"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
             />
           </IconSvg>
         ),
       },
       {
-        name: "C#",
+        name: "Coolify",
         icon: (
           <IconSvg>
-            <path
-              d="M12 2L3 7v10l9 5 9-5V7L12 2z"
+            <rect
+              x="3"
+              y="13"
+              width="18"
+              height="7"
+              rx="2"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.3"
             />
-            <text
-              x="7.5"
-              y="15.5"
-              fontFamily="monospace"
-              fontWeight="700"
-              fontSize="8"
-              fill="currentColor"
-            >
-              C#
-            </text>
+            <circle cx="6.5" cy="16.5" r="1" fill="currentColor" />
+            <path
+              d="M12 10V3m0 0L8.5 6.5M12 3l3.5 3.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </IconSvg>
         ),
       },
       {
-        name: "C++",
+        name: "Cloudflare",
         icon: (
           <IconSvg>
             <path
-              d="M12 2L3 7v10l9 5 9-5V7L12 2z"
+              d="M16.5 18H7a4 4 0 01-.4-8 5.5 5.5 0 0110.3-1.3A3.9 3.9 0 0122 12.4 3.6 3.6 0 0118.4 18h-1.9z"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.3"
+              strokeLinejoin="round"
             />
-            <text
-              x="6"
-              y="15.5"
-              fontFamily="monospace"
-              fontWeight="700"
-              fontSize="8"
-              fill="currentColor"
-            >
-              C++
-            </text>
+          </IconSvg>
+        ),
+      },
+      {
+        name: "Vercel",
+        icon: (
+          <IconSvg>
+            <path d="M12 2L2 20h20L12 2z" fill="currentColor" />
           </IconSvg>
         ),
       },
@@ -527,39 +495,6 @@ const tools = [
         ),
       },
       {
-        name: "Linux",
-        icon: (
-          <IconSvg>
-            <path
-              d="M12 2a5 5 0 014 2c1 1.5 1 3 .5 5-.5 1.5-1 3-.5 4.5.5 1.5 1 2 .5 3-.5 1-2 1.5-4.5 1.5S8 17.5 7.5 16.5c-.5-1 0-1.5.5-3s-.5-3-.5-4.5C7 7.5 7 5.5 8 4a5 5 0 014-2z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-            />
-            <circle cx="10" cy="9" r="1" fill="currentColor" />
-            <circle cx="14" cy="9" r="1" fill="currentColor" />
-            <path
-              d="M9 13.5s1 1.5 3 1.5 3-1.5 3-1.5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-            />
-            <path
-              d="M8 19l-2 2M16 19l2 2"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-            />
-          </IconSvg>
-        ),
-      },
-    ],
-  },
-  {
-    key: "tools",
-    category: { en: "TOOLS & ENV", es: "HERRAMIENTAS" },
-    items: [
-      {
         name: "Git / GitHub",
         icon: (
           <IconSvg>
@@ -570,22 +505,126 @@ const tools = [
           </IconSvg>
         ),
       },
+    ],
+  },
+  {
+    key: "languages",
+    category: { en: "LANGUAGES & TESTING", es: "LENGUAJES & PRUEBAS" },
+    items: [
       {
-        name: "VS Code",
+        name: "Java",
         icon: (
           <IconSvg>
             <path
-              d="M17 2L7 13 3 10l-1 1 4.5 4L3 19l1 1 3.5-3L17 22l4-2V4l-4-2zm2 17.5L8.5 12 19 4.5v15z"
+              d="M8.5 17s-.8.5.6.6c1.7.2 2.5.2 4.4-.2 0 0 .5.3 1.2.6-4.1 1.7-9.3-.1-6.2-1zm-.5-2.3s-.9.7.5.8c1.7.2 3.1.2 5.4-.3 0 0 .3.4 1 .5-4.8 1.4-10.1.1-6.9-1zM12.2 10.6c1 1.1-.3 2.2-.3 2.2s2.4-1.3 1.3-2.8c-1-1.4-1.8-2.1 2.4-4.5 0 0-6.5 1.6-3.4 5.1zM13 2s2.2 2.2-2.1 5.6c-3.4 2.7-.8 4.2 0 5.9-2-1.8-3.4-3.4-2.5-4.8C9.8 6.8 13.9 5.7 13 2z"
               fill="currentColor"
             />
           </IconSvg>
         ),
       },
       {
-        name: "Vercel",
+        name: "PHP",
         icon: (
           <IconSvg>
-            <path d="M12 2L2 20h20L12 2z" fill="currentColor" />
+            <ellipse
+              cx="12"
+              cy="12"
+              rx="10"
+              ry="6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+            />
+            <text
+              x="5"
+              y="16"
+              fontFamily="monospace"
+              fontWeight="900"
+              fontSize="8"
+              fill="currentColor"
+            >
+              PHP
+            </text>
+          </IconSvg>
+        ),
+      },
+      {
+        name: "C++",
+        icon: (
+          <IconSvg>
+            <path
+              d="M12 2L3 7v10l9 5 9-5V7L12 2z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+            />
+            <text
+              x="6"
+              y="15.5"
+              fontFamily="monospace"
+              fontWeight="700"
+              fontSize="8"
+              fill="currentColor"
+            >
+              C++
+            </text>
+          </IconSvg>
+        ),
+      },
+      { name: "SQL", icon: <TextIcon label="SQL" size={8} /> },
+      {
+        name: "Jest",
+        icon: (
+          <IconSvg>
+            <path
+              d="M12 3l6 4-1.5 9.5a1 1 0 01-.6.8L12 19l-3.9-1.7a1 1 0 01-.6-.8L6 7l6-4z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M9.5 11.5l1.8 1.8 3.2-3.6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </IconSvg>
+        ),
+      },
+      {
+        name: "PHPUnit",
+        icon: (
+          <IconSvg>
+            <rect
+              x="3"
+              y="4"
+              width="18"
+              height="16"
+              rx="2"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+            />
+            <path
+              d="M7 11.5l2 2 3.5-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <line
+              x1="14.5"
+              y1="15"
+              x2="17.5"
+              y2="15"
+              stroke="currentColor"
+              strokeWidth="1.3"
+              strokeLinecap="round"
+            />
           </IconSvg>
         ),
       },
@@ -613,22 +652,31 @@ const tools = [
         ),
       },
       {
-        name: "Contentful",
+        name: "Jira",
         icon: (
           <IconSvg>
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
+            <path
+              d="M12 2l9 9-4.5 4.5L12 11l-4.5 4.5L3 11l9-9z"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.3"
+              strokeLinejoin="round"
             />
             <path
-              d="M8 12a4 4 0 004-4M8 12a4 4 0 004 4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
+              d="M12 13l4.5 4.5L12 22l-4.5-4.5L12 13z"
+              fill="currentColor"
+              opacity="0.5"
+            />
+          </IconSvg>
+        ),
+      },
+      {
+        name: "VS Code",
+        icon: (
+          <IconSvg>
+            <path
+              d="M17 2L7 13 3 10l-1 1 4.5 4L3 19l1 1 3.5-3L17 22l4-2V4l-4-2zm2 17.5L8.5 12 19 4.5v15z"
+              fill="currentColor"
             />
           </IconSvg>
         ),
@@ -659,6 +707,8 @@ export default function Toolkit() {
             </div>
           ))}
         </div>
+
+        <Credentials />
       </div>
     </section>
   );

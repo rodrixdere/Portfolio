@@ -18,7 +18,8 @@
    Cada proyecto se fija a top = i × altura del bookmark: cuando el
    siguiente sube, el anterior queda reducido a su barra de nombre */
 .project {
-  --bookmark-h: 44px;
+  /* La escalera se acumula — cada píxel de más acá se lo quita al último */
+  --bookmark-h: 34px;
   position: sticky;
   top: calc(var(--i) * var(--bookmark-h));
   /* lvh (viewport con la barra del navegador colapsada): con svh, al
@@ -111,6 +112,19 @@
   border: 0.5px solid #2a2a2a;
   cursor: none;
   transition: border-color 0.3s, transform 0.3s ease;
+  justify-self: end;
+}
+
+/* Si la card pasa el alto de su ranura, el proyecto no llega a su posición
+   sticky y la escalera de bookmarks se desarma al final de la sección.
+   El alto libre es el viewport menos la escalera (los anteriores más el
+   bookmark propio, de ahí el +1) menos 132px de padding y barra; por 1.6
+   para pasarlo a ancho, que la preview es 16/10. En pantallas altas no aplica */
+@media (min-width: 901px) {
+  .card {
+    max-width: calc((100vh - (var(--i) + 1) * var(--bookmark-h) - 132px) * 1.6);
+    max-width: calc((100lvh - (var(--i) + 1) * var(--bookmark-h) - 132px) * 1.6);
+  }
 }
 
 .card:hover {
@@ -282,6 +296,61 @@
   text-transform: uppercase;
 }
 
+/* ── TERMINAL (DocWizard) — ocupa el lugar de la preview ── */
+.terminal {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 0.8vw, 12px);
+  line-height: 1.5;
+}
+
+.terminal p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.termCmd { color: #eee; }
+.termPrompt { color: var(--green); }
+.termDim { color: #777; padding-left: 14px; }
+.termOk { color: #cfcfcf; padding-left: 14px; }
+
+/* Cada línea de salida entra con un desplazamiento corto, como si el proceso
+   la fuera escribiendo */
+.termLine {
+  animation: termIn 0.18s ease-out both;
+}
+
+@keyframes termIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.caret {
+  display: inline-block;
+  width: 7px;
+  height: 1.05em;
+  background: var(--green);
+  vertical-align: text-bottom;
+  animation: caretBlink 1s step-end infinite;
+}
+
+@keyframes caretBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .termLine { animation: none; }
+  .caret { animation: none; }
+}
+
 /* Flecha cuadrada — mismo lenguaje que el botón de CV */
 .cardArrow {
   position: absolute;
@@ -302,6 +371,7 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
+
   .projectBody {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -318,7 +388,7 @@
 }
 
 @media (max-width: 600px) {
-  .project { --bookmark-h: 38px; }
+  .project { --bookmark-h: 30px; }
 
   .bookmarkName {
     font-size: 12px;
