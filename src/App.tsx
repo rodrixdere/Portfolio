@@ -1,4 +1,5 @@
 import Cursor from './components/Cursor'
+import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
 import Toolkit from './components/Toolkit'
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <LangProvider>
       <Cursor />
+      <Nav />
       <main>
         <div data-stack style={{ overflow: 'hidden' }}>
           <Hero />

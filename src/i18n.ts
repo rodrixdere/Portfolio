@@ -29,7 +29,7 @@ export interface Translations {
     pillars: { big: string; label: string }[]
   }
   toolkit: { label: string }
-  work: { label: string; educationLabel: string }
+  work: { label: string; educationLabel: string; indexLabel: string }
   contact: {
     label: string
     heading: string
@@ -67,7 +67,7 @@ export const translations: Record<Lang, Translations> = {
       desc: 'I build complete web applications and then operate them in production, including the Linux infrastructure underneath. Node.js, Python/FastAPI, React, Next.js, PostgreSQL, Docker. Based in Costa Rica.',
       logs: 'PROJECT LOGS →',
       cv: '↓ DOWNLOAD CV',
-      available: 'AVAILABLE FOR NEW PROJECTS',
+      available: 'OPEN TO FULL-TIME SOFTWARE ENGINEER ROLES',
       localTime: 'LOCAL TIME',
     },
     about: {
@@ -75,7 +75,7 @@ export const translations: Record<Lang, Translations> = {
       hi: 'HI',
       there: 'THERE',
       p1: 'Full-Stack Software Engineer based in Costa Rica, with a B.S. in Software Engineering from Universidad Latina de Costa Rica. I ship software and then operate it: architecture, implementation, deployment and the Linux server it runs on.',
-      p2: 'My stack is Node.js and Python/FastAPI on the backend, React and Next.js with TypeScript on the front, PostgreSQL for data, and Docker on self-managed Linux. I delivered a production platform serving 150 daily active users as sole engineer, I run a self-hosted SaaS with a 65-test automated suite, and I have published an open-source CLI on npm.',
+      p2: 'My stack is Node.js and Python/FastAPI on the backend, React and Next.js with TypeScript on the front, PostgreSQL for data, and Docker on self-managed Linux. I delivered a production platform serving 150 daily active users as sole engineer, I run a self-hosted SaaS with a 139-test automated suite, and I have published an open-source CLI on npm.',
       p3: 'Advanced English (C1+). I work with Agile / Scrum and care about clean architecture, automated testing and systems that hold up under real use.',
       pillars: [
         { big: 'END-TO-END', label: 'From requirements to production' },
@@ -87,14 +87,15 @@ export const translations: Record<Lang, Translations> = {
     work: {
       label: '04 / FEATURED WORK',
       educationLabel: 'EDUCATION & CERTIFICATION',
+      indexLabel: 'Project index',
     },
     contact: {
-      label: '05 / START A PROJECT',
+      label: '05 / CONTACT',
       heading: "LET'S TALK",
       cv: 'DOWNLOAD CV',
       namePlaceholder: 'Your Name',
       emailPlaceholder: 'Your Email',
-      messagePlaceholder: 'Tell me about your project',
+      messagePlaceholder: 'Tell me about the role or write to me directly',
       send: 'SEND MESSAGE',
       sending: 'SENDING...',
       success: 'MESSAGE SENT ✓',
@@ -123,7 +124,7 @@ export const translations: Record<Lang, Translations> = {
       desc: 'Construyo aplicaciones web completas y después las opero en producción, incluida la infraestructura Linux por debajo. Node.js, Python/FastAPI, React, Next.js, PostgreSQL, Docker. Basado en Costa Rica.',
       logs: 'VER PROYECTOS →',
       cv: '↓ DESCARGAR CV',
-      available: 'DISPONIBLE PARA NUEVOS PROYECTOS',
+      available: 'DISPONIBLE PARA PUESTOS DE INGENIERO DE SOFTWARE',
       localTime: 'HORA LOCAL',
     },
     about: {
@@ -131,7 +132,7 @@ export const translations: Record<Lang, Translations> = {
       hi: 'HO',
       there: 'LA',
       p1: 'Ingeniero de Software Full-Stack basado en Costa Rica, con un bachillerato en Ingeniería en Software de la Universidad Latina de Costa Rica. Entrego software y después lo opero: arquitectura, implementación, despliegue y el servidor Linux donde corre.',
-      p2: 'Mi stack es Node.js y Python/FastAPI en el backend, React y Next.js con TypeScript en el front, PostgreSQL para datos y Docker sobre Linux autogestionado. Entregué una plataforma en producción con 150 usuarios activos diarios como ingeniero único, opero un SaaS self-hosted con una suite de 65 pruebas automatizadas y publiqué un CLI open source en npm.',
+      p2: 'Mi stack es Node.js y Python/FastAPI en el backend, React y Next.js con TypeScript en el front, PostgreSQL para datos y Docker sobre Linux autogestionado. Entregué una plataforma en producción con 150 usuarios activos diarios como ingeniero único, opero un SaaS self-hosted con una suite de 139 pruebas automatizadas y publiqué un CLI open source en npm.',
       p3: 'Inglés avanzado (C1+). Trabajo con Agile / Scrum y me importan la arquitectura limpia, las pruebas automatizadas y los sistemas que aguantan uso real.',
       pillars: [
         { big: 'END-TO-END', label: 'De requisitos a producción' },
@@ -143,14 +144,15 @@ export const translations: Record<Lang, Translations> = {
     work: {
       label: '04 / PROYECTOS DESTACADOS',
       educationLabel: 'FORMACIÓN Y CERTIFICACIÓN',
+      indexLabel: 'Índice de proyectos',
     },
     contact: {
-      label: '05 / INICIAR PROYECTO',
+      label: '05 / CONTACTO',
       heading: 'HABLEMOS',
       cv: 'DESCARGAR CV',
       namePlaceholder: 'Tu Nombre',
       emailPlaceholder: 'Tu Email',
-      messagePlaceholder: 'Cuéntame sobre tu proyecto',
+      messagePlaceholder: 'Contame sobre el puesto o escribime directo',
       send: 'ENVIAR MENSAJE',
       sending: 'ENVIANDO...',
       success: 'MENSAJE ENVIADO ✓',

@@ -2,16 +2,81 @@
   background: #000;
   border-top: 0.5px solid #1a1a1a;
   min-height: 100svh;
-  /* Sin padding — los proyectos son full-bleed para el efecto bookmark */
+  /* Sin padding — los proyectos son full-bleed para el efecto bookmark; el
+     colchón del final es un hijo real (.tail) */
+}
+
+/* Recorrido que necesita el último proyecto para fijarse en su escalón.
+   Contacto lo cubre con su pin, así que no se ve como hueco. */
+.tail {
+  height: 45vh;
+  background: #000;
 }
 
 .label {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #444;
+  font-size: 12px;
+  color: #8a8a8a;
   letter-spacing: 0.15em;
   display: block;
-  padding: 28px var(--margin) 16px;
+  /* El colchón del nav fijo, igual que en el resto de secciones */
+  padding: calc(var(--nav-h) + 20px) var(--margin) 16px;
+}
+
+/* ── ÍNDICE DE PROYECTOS ── */
+.index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  background: #1a1a1a;
+  border-top: 0.5px solid #1a1a1a;
+  border-bottom: 0.5px solid #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.indexItem {
+  background: #000;
+  padding: 15px var(--margin);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: background 0.2s;
+}
+.indexItem:hover { background: #0e0e0e; }
+
+.indexNum {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #8a8a8a;
+  letter-spacing: 0.05em;
+}
+
+.indexName {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1.4px;
+  line-height: 1.15;
+}
+
+.indexTag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #a6a6a6;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 768px) {
+  .index { grid-template-columns: 1fr 1fr; }
+  .indexItem { padding: 12px 14px; }
+  .indexName { font-size: 15px; }
+
+  /* En dos columnas, un total impar deja al último con un hueco negro al
+     lado: que ocupe la fila entera */
+  .indexItem:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 /* ── PROYECTO = SECCIÓN STICKY ──
@@ -20,13 +85,19 @@
 .project {
   /* La escalera se acumula — cada píxel de más acá se lo quita al último */
   --bookmark-h: 34px;
+  /* Escalón propio dentro de la escalera. En escritorio es el índice; en
+     móvil se topa (ver media query) */
+  --step: var(--i);
   position: sticky;
-  top: calc(var(--i) * var(--bookmark-h));
+  /* Arranca debajo del nav fijo, que si no tapa el bookmark del primero */
+  top: calc(var(--nav-h) + var(--step) * var(--bookmark-h));
+  /* Al saltar desde el índice, no aterrizar debajo del nav ni de los bookmarks */
+  scroll-margin-top: calc(var(--nav-h) + var(--step) * var(--bookmark-h));
   /* lvh (viewport con la barra del navegador colapsada): con svh, al
      scrollear en móvil el viewport crece y el proyecto anterior se
      asomaba por abajo del que lo tapa */
-  min-height: calc(100vh - var(--i) * var(--bookmark-h));
-  min-height: calc(100lvh - var(--i) * var(--bookmark-h));
+  min-height: calc(100vh - var(--nav-h) - var(--step) * var(--bookmark-h));
+  min-height: calc(100lvh - var(--nav-h) - var(--step) * var(--bookmark-h));
   display: flex;
   flex-direction: column;
   background: #000; /* opaco: debe tapar al proyecto anterior */
@@ -47,8 +118,8 @@
 
 .bookmarkNum {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #444;
+  font-size: 12px;
+  color: #8a8a8a;
   letter-spacing: 0.05em;
 }
 
@@ -89,8 +160,8 @@
 
 .desc {
   font-family: var(--font-body);
-  font-size: clamp(13px, 1.1vw, 15px);
-  color: #888;
+  font-size: clamp(15px, 1.1vw, 17px);
+  color: #bababa;
   line-height: 1.9;
   max-width: 46ch;
   margin-bottom: 28px;
@@ -98,8 +169,8 @@
 
 .tags {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #444;
+  font-size: 12px;
+  color: #8a8a8a;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -122,13 +193,13 @@
    para pasarlo a ancho, que la preview es 16/10. En pantallas altas no aplica */
 @media (min-width: 901px) {
   .card {
-    max-width: calc((100vh - (var(--i) + 1) * var(--bookmark-h) - 132px) * 1.6);
-    max-width: calc((100lvh - (var(--i) + 1) * var(--bookmark-h) - 132px) * 1.6);
+    max-width: calc((100vh - var(--nav-h) - (var(--step) + 1) * var(--bookmark-h) - 132px) * 1.6);
+    max-width: calc((100lvh - var(--nav-h) - (var(--step) + 1) * var(--bookmark-h) - 132px) * 1.6);
   }
 }
 
 .card:hover {
-  border-color: #555;
+  border-color: #9a9a9a;
   transform: translateY(-4px);
 }
 
@@ -158,8 +229,8 @@
 
 .chromeUrl {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #666;
+  font-size: 12px;
+  color: #a6a6a6;
   letter-spacing: 0.06em;
   white-space: nowrap;
   overflow: hidden;
@@ -172,8 +243,8 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 9px;
-  color: #555;
+  font-size: 11px;
+  color: #9a9a9a;
   letter-spacing: 0.15em;
   flex-shrink: 0;
 }
@@ -274,8 +345,8 @@
 
 .phNum {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #555;
+  font-size: 12px;
+  color: #9a9a9a;
   letter-spacing: 0.1em;
 }
 
@@ -290,8 +361,8 @@
 
 .phTags {
   font-family: var(--font-mono);
-  font-size: 9px;
-  color: #555;
+  font-size: 11px;
+  color: #9a9a9a;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -306,7 +377,7 @@
   gap: 6px;
   width: 100%;
   font-family: var(--font-mono);
-  font-size: clamp(9px, 0.8vw, 12px);
+  font-size: clamp(11px, 0.9vw, 13px);
   line-height: 1.5;
 }
 
@@ -318,7 +389,7 @@
 
 .termCmd { color: #eee; }
 .termPrompt { color: var(--green); }
-.termDim { color: #777; padding-left: 14px; }
+.termDim { color: #b0b0b0; padding-left: 14px; }
 .termOk { color: #cfcfcf; padding-left: 14px; }
 
 /* Cada línea de salida entra con un desplazamiento corto, como si el proceso
@@ -388,10 +459,17 @@
 }
 
 @media (max-width: 600px) {
-  .project { --bookmark-h: 30px; }
+  /* Escalones más juntos, que en un teléfono la escalera se come el alto */
+  .project { --bookmark-h: 23px; }
+
+  /* El último sube al escalón del segundo y tapa los bookmarks intermedios:
+     al final quedan dos barras a la vista en vez de cinco. No extenderlo al
+     resto con `--step: min(var(--i), 1)` — compartiendo escalón el último
+     necesita más recorrido y GSAP pinea la sección antes de que llegue. */
+  .project:last-of-type { --step: 1; }
 
   .bookmarkName {
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 1.5px;
   }
 

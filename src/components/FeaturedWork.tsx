@@ -72,17 +72,18 @@ function DocwizardTerminal() {
     return () => io.disconnect();
   }, []);
 
-  // Tecleo del comando
+  // Tecleo del comando. Rápido a propósito: la secuencia entera tiene que
+  // terminar en ~1s o el lector se queda esperando para ver de qué va el proyecto
   useEffect(() => {
     if (!running || typed >= CMD.length) return;
-    const id = setTimeout(() => setTyped((n) => n + 1), 38);
+    const id = setTimeout(() => setTyped((n) => n + 1), 16);
     return () => clearTimeout(id);
   }, [running, typed]);
 
   // Salida, línea por línea, una vez tecleado el comando
   useEffect(() => {
     if (!running || typed < CMD.length || lines >= OUTPUT.length) return;
-    const id = setTimeout(() => setLines((n) => n + 1), lines === 0 ? 420 : 260);
+    const id = setTimeout(() => setLines((n) => n + 1), lines === 0 ? 140 : 85);
     return () => clearTimeout(id);
   }, [running, typed, lines]);
 
@@ -165,8 +166,8 @@ const projects: Project[] = [
     url: "https://cabinance.app",
     image: "/projects/cabinance.png",
     desc: {
-      en: "Personal-finance SaaS I built and operate on my own: budgets, savings goals, recurring payments, gamified achievements and insights computed automatically from user financial data. Next.js over a Python/FastAPI backend and PostgreSQL, 65 automated tests, Dockerized on a self-managed Linux VPS behind Cloudflare.",
-      es: "SaaS de finanzas personales que construí y opero yo solo: presupuestos, metas de ahorro, pagos recurrentes, logros gamificados e insights calculados automáticamente a partir de los datos financieros del usuario. Next.js sobre un backend Python/FastAPI y PostgreSQL, 65 pruebas automatizadas, dockerizado en un VPS Linux autogestionado detrás de Cloudflare.",
+      en: "Personal-finance SaaS I built and operate on my own: budgets, savings goals, recurring payments, gamified achievements and insights computed automatically from user financial data. Next.js over a Python/FastAPI backend and PostgreSQL, 139 automated tests, Dockerized on a self-managed Linux VPS behind Cloudflare.",
+      es: "SaaS de finanzas personales que construí y opero yo solo: presupuestos, metas de ahorro, pagos recurrentes, logros gamificados e insights calculados automáticamente a partir de los datos financieros del usuario. Next.js sobre un backend Python/FastAPI y PostgreSQL, 139 pruebas automatizadas, dockerizado en un VPS Linux autogestionado detrás de Cloudflare.",
     },
   },
 ];
@@ -194,26 +195,10 @@ function ProjectCard({ project, lang }: { project: Project; lang: Lang }) {
     return () => ro.disconnect();
   }, []);
 
-  // En dispositivos táctiles no hay lente (no hay mouse): la card gana su
-  // color cuando entra en pantalla, con una transición CSS. Se usa
-  // IntersectionObserver (no scroll por frame) para que el scroll rápido
-  // no recalcule el backdrop-filter constantemente.
-  const [colored, setColored] = useState(false);
+  // Las previews quedan siempre en blanco y negro: cada sitio trae su propia
+  // paleta y colorearlas rompe la unidad de la sección. El color real aparece
+  // solo bajo el lente, en desktop.
   const hasPreview = !project.noPreview;
-  useEffect(() => {
-    if (!hasPreview) return;
-    if (!window.matchMedia("(hover: none) and (pointer: coarse)").matches) return;
-    const el = vpRef.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => setColored(entry.isIntersecting),
-      // Se activa cuando ~40% de la card es visible; al salir vuelve a B/N
-      { threshold: 0.4 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [hasPreview]);
 
   const onMouseMove = (e: MouseEvent) => {
     // Sin preview no hay nada que revelar — el lente solo estorbaría
@@ -308,7 +293,7 @@ function ProjectCard({ project, lang }: { project: Project; lang: Lang }) {
         {/* Capa blanco y negro — el agujero del clip muestra el color real */}
         {hasPreview && (
           <span
-            className={`${styles.bw} ${colored ? styles.bwOff : ""}`}
+            className={styles.bw}
             aria-hidden="true"
             style={{ clipPath: bwClip }}
           />
@@ -340,9 +325,26 @@ export default function FeaturedWork() {
     <section className={styles.work} id="work">
       <span className={styles.label}>{t.work.label}</span>
 
+      {/* Índice: los proyectos de un vistazo, sin bajar por toda la pila
+          sticky ni esperar animaciones */}
+      <nav className={styles.index} aria-label={t.work.indexLabel}>
+        {projects.map((p) => (
+          <a
+            key={p.num}
+            href={`#project-${p.num}`}
+            className={styles.indexItem}
+          >
+            <span className={styles.indexNum}>{p.num}</span>
+            <span className={styles.indexName}>{p.name}</span>
+            <span className={styles.indexTag}>{p.tags.split(" / ")[0]}</span>
+          </a>
+        ))}
+      </nav>
+
       {projects.map((p, i) => (
         <article
           key={p.num}
+          id={`project-${p.num}`}
           className={styles.project}
           style={{ "--i": i } as CSSProperties}
         >
@@ -362,6 +364,11 @@ export default function FeaturedWork() {
           </div>
         </article>
       ))}
+
+      {/* Colchón para el último proyecto: sticky no se desplaza fuera de su
+          contenedor, así que sin esto el último no llega a su escalón y sube
+          hasta el tope tapando el bookmark del primero */}
+      <div className={styles.tail} aria-hidden="true" />
     </section>
   );
 }

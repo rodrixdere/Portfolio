@@ -1,6 +1,6 @@
 .toolkit {
   background: #0a0a0a;
-  padding: 48px var(--margin) 80px;
+  padding: calc(var(--nav-h) + 26px) var(--margin) 80px;
   border-top: 0.5px solid #111;
   min-height: 100vh;
   display: flex;
@@ -15,8 +15,8 @@
 
 .label {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #555;
+  font-size: 12px;
+  color: #9a9a9a;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: block;
@@ -39,8 +39,8 @@
 
 .groupTitle {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #aaa;
+  font-size: 12px;
+  color: #cccccc;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   margin-bottom: 24px;
@@ -79,7 +79,7 @@
 
 .itemName {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: #c0c0c0;
   letter-spacing: 0.04em;
   transition: color 0.2s;

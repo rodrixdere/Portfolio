@@ -4,7 +4,7 @@
   color: #000;
   width: 100%;
   min-height: 100vh;
-  padding: 48px var(--margin) 80px;
+  padding: calc(var(--nav-h) + 26px) var(--margin) 80px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,8 @@
 
 .label {
   font-family: var(--font-mono);
-  font-size: 9px;
-  color: #999;
+  font-size: 11px;
+  color: #c4c4c4;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   display: block;
@@ -65,8 +65,8 @@
 
 .bio p {
   font-family: var(--font-body);
-  font-size: clamp(13px, 1.2vw, 15px);
-  color: #555;
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: #9a9a9a;
   line-height: 1.9;
 }
 
@@ -104,8 +104,8 @@
 
 .statLabel {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #999;
+  font-size: 12px;
+  color: #c4c4c4;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-top: 8px;

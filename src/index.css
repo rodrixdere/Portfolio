@@ -15,10 +15,20 @@
   --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --margin: clamp(20px, 5vw, 96px);
+  /* Alto del nav fijo — lo usan la escalera de bookmarks y el scroll-margin
+     de las anclas para no quedar tapados */
+  --nav-h: 52px;
+}
+
+/* Al saltar con #about / #work / #contact, dejar libre el alto del nav */
+section[id] {
+  scroll-margin-top: var(--nav-h);
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Sin `scroll-behavior: smooth`: los pines de ScrollTrigger corrigen la
+     posición a mitad del scroll animado del navegador y el salto termina en
+     la sección de al lado */
   scrollbar-width: none;
 }
 
@@ -30,7 +40,9 @@ body {
   background: var(--black);
   color: var(--white);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  /* clip, no hidden: con `hidden` el body pasa a ser el scroller, window.scrollY
+     queda clavado en 0 y se rompen las anclas y el scroll por teclado */
+  overflow-x: clip;
   -ms-overflow-style: none;
 }
 

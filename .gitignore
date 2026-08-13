@@ -29,3 +29,7 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+# Notas de trabajo locales
+CLAUDE.md
+.claude/
