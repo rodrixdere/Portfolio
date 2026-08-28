@@ -99,41 +99,59 @@ export default function Contact() {
           <div className={styles.right}>
             <form ref={formRef} onSubmit={handleSubmit} className={styles.form} noValidate>
               <div className={`${styles.field} ${errors.from_name ? styles.fieldInvalid : ''}`}>
+                <label htmlFor="from_name" className={styles.fieldLabel}>
+                  {t.contact.nameLabel}
+                </label>
                 <input
+                  id="from_name"
                   type="text"
                   name="from_name"
-                  placeholder={t.contact.namePlaceholder}
+                  autoComplete="name"
+                  aria-invalid={!!errors.from_name}
+                  aria-describedby={errors.from_name ? 'err-from_name' : undefined}
                   disabled={status === 'sending'}
                   className={styles.input}
                 />
                 {errors.from_name && (
-                  <span className={styles.fieldError}>{errors.from_name}</span>
+                  <span id="err-from_name" className={styles.fieldError}>{errors.from_name}</span>
                 )}
               </div>
 
               <div className={`${styles.field} ${errors.reply_to ? styles.fieldInvalid : ''}`}>
+                <label htmlFor="reply_to" className={styles.fieldLabel}>
+                  {t.contact.emailLabel}
+                </label>
                 <input
+                  id="reply_to"
                   type="email"
                   name="reply_to"
-                  placeholder={t.contact.emailPlaceholder}
+                  autoComplete="email"
+                  aria-invalid={!!errors.reply_to}
+                  aria-describedby={errors.reply_to ? 'err-reply_to' : undefined}
                   disabled={status === 'sending'}
                   className={styles.input}
                 />
                 {errors.reply_to && (
-                  <span className={styles.fieldError}>{errors.reply_to}</span>
+                  <span id="err-reply_to" className={styles.fieldError}>{errors.reply_to}</span>
                 )}
               </div>
 
               <div className={`${styles.field} ${errors.message ? styles.fieldInvalid : ''}`}>
+                <label htmlFor="message" className={styles.fieldLabel}>
+                  {t.contact.messageLabel}
+                </label>
                 <textarea
+                  id="message"
                   name="message"
                   placeholder={t.contact.messagePlaceholder}
                   rows={4}
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? 'err-message' : undefined}
                   disabled={status === 'sending'}
                   className={styles.textarea}
                 />
                 {errors.message && (
-                  <span className={styles.fieldError}>{errors.message}</span>
+                  <span id="err-message" className={styles.fieldError}>{errors.message}</span>
                 )}
               </div>
 

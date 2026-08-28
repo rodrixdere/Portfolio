@@ -7,7 +7,10 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* safe: cuando el contenido pasa el alto del viewport, centrarlo lo empuja
+     por arriba y el título termina debajo del nav fijo. Con safe se alinea
+     al inicio en vez de recortarse. */
+  justify-content: safe center;
 }
 
 .label {
@@ -83,6 +86,16 @@
 
 .field { border-bottom: 0.5px solid #222; }
 
+.fieldLabel {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  padding-top: 14px;
+}
+
 .input,
 .textarea {
   width: 100%;
@@ -92,14 +105,14 @@
   font-family: var(--font-body);
   font-size: 13px;
   color: #fff;
-  padding: 20px 0;
+  padding: 6px 0 14px;
   resize: none;
 }
 
 .input::placeholder,
 .textarea::placeholder { color: #8a8a8a; }
 
-.textarea { min-height: 100px; }
+.textarea { min-height: 76px; }
 
 .btn {
   margin-top: 32px;
@@ -135,21 +148,23 @@
   }
 }
 
+/* La seccion tiene que caber en el viewport: es la ultima del apilado
+   y, si se pasa de alto, su cabecera queda debajo del nav fijo */
 @media (max-width: 600px) {
   .contact {
-    padding: 60px var(--margin) 80px;
+    padding: 64px var(--margin) 20px;
   }
 
-  .grid { gap: 40px; }
+  .grid { gap: 22px; }
 
   .heading {
     font-size: clamp(32px, 9vw, 52px);
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 
   .link {
     font-size: clamp(26px, 7vw, 36px);
-    padding: 10px 0;
+    padding: 7px 0;
   }
 
   .btn {

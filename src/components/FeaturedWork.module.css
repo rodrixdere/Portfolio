@@ -477,4 +477,12 @@
     font-size: clamp(28px, 9vw, 44px);
     letter-spacing: 1px;
   }
+
+  /* El interlineado de 1.9 se come el alto que necesita la preview: con
+     descripciones largas la card se pasa del viewport y el sitio en vivo
+     queda cortado abajo. */
+  .desc {
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
 }
