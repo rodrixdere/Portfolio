@@ -26,6 +26,7 @@ export interface Translations {
     p1: string
     p2: string
     p3: string
+    p4: string
     pillars: { big: string; label: string }[]
   }
   toolkit: { label: string }
@@ -34,6 +35,9 @@ export interface Translations {
     label: string
     heading: string
     cv: string
+    nameLabel: string
+    emailLabel: string
+    messageLabel: string
     namePlaceholder: string
     emailPlaceholder: string
     messagePlaceholder: string
@@ -72,14 +76,15 @@ export const translations: Record<Lang, Translations> = {
     },
     about: {
       label: '02 / ABOUT',
-      hi: 'HI',
-      there: 'THERE',
-      p1: 'Full-Stack Software Engineer based in Costa Rica, with a B.S. in Software Engineering from Universidad Latina de Costa Rica. I ship software and then operate it: architecture, implementation, deployment and the Linux server it runs on.',
-      p2: 'My stack is Node.js and Python/FastAPI on the backend, React and Next.js with TypeScript on the front, PostgreSQL for data, and Docker on self-managed Linux. I delivered a production platform serving 150 daily active users as sole engineer, I run a self-hosted SaaS with a 139-test automated suite, and I have published an open-source CLI on npm.',
-      p3: 'Advanced English (C1+). I work with Agile / Scrum and care about clean architecture, automated testing and systems that hold up under real use.',
+      hi: 'HELLO',
+      there: 'WORLD',
+      p1: 'Full-Stack Software Engineer based in Costa Rica, with four years building web applications and a B.S. in Software Engineering from Universidad Latina de Costa Rica. I build and maintain software end to end, from architecture and development to deployment and the infrastructure that keeps it running.',
+      p2: 'I built a platform for a foundation to replace a manual, paper-based process with a centralized system for managing their day-to-day operations. I developed the platform independently and took responsibility for the entire product, from understanding the organization\'s needs to deploying and maintaining it in production. The result was a system that became part of their daily workflow and continues to be used in their operations.',
+      p3: 'I also develop and run my own finance SaaS, which has given me experience beyond application development: authentication, data isolation, session management, rate limiting, automated testing, deployment, and server administration. Building and operating the product myself has taught me to think about how software behaves in production, not just how to make it work locally.',
+      p4: 'I have an advanced level of English (C1+) and experience with Agile/Scrum. I care about clean architecture, maintainable code, and building software that can be trusted in real-world use.',
       pillars: [
         { big: 'END-TO-END', label: 'From requirements to production' },
-        { big: 'IN PRODUCTION', label: 'Apps with real users today' },
+        { big: 'IN PRODUCTION', label: 'Deployed and maintained by me' },
         { big: 'TEAM-READY', label: 'Agile, Scrum and code reviews' },
       ],
     },
@@ -93,6 +98,9 @@ export const translations: Record<Lang, Translations> = {
       label: '05 / CONTACT',
       heading: "LET'S TALK",
       cv: 'DOWNLOAD CV',
+      nameLabel: 'NAME',
+      emailLabel: 'EMAIL',
+      messageLabel: 'MESSAGE',
       namePlaceholder: 'Your Name',
       emailPlaceholder: 'Your Email',
       messagePlaceholder: 'Tell me about the role or write to me directly',
@@ -129,14 +137,15 @@ export const translations: Record<Lang, Translations> = {
     },
     about: {
       label: '02 / SOBRE MÍ',
-      hi: 'HO',
-      there: 'LA',
-      p1: 'Ingeniero de Software Full-Stack basado en Costa Rica, con un bachillerato en Ingeniería en Software de la Universidad Latina de Costa Rica. Entrego software y después lo opero: arquitectura, implementación, despliegue y el servidor Linux donde corre.',
-      p2: 'Mi stack es Node.js y Python/FastAPI en el backend, React y Next.js con TypeScript en el front, PostgreSQL para datos y Docker sobre Linux autogestionado. Entregué una plataforma en producción con 150 usuarios activos diarios como ingeniero único, opero un SaaS self-hosted con una suite de 139 pruebas automatizadas y publiqué un CLI open source en npm.',
-      p3: 'Inglés avanzado (C1+). Trabajo con Agile / Scrum y me importan la arquitectura limpia, las pruebas automatizadas y los sistemas que aguantan uso real.',
+      hi: 'HOLA',
+      there: 'MUNDO',
+      p1: 'Ingeniero de Software Full-Stack basado en Costa Rica, con cuatro años construyendo aplicaciones web y un bachillerato en Ingeniería en Software de la Universidad Latina de Costa Rica. Construyo y mantengo software de extremo a extremo: arquitectura, desarrollo, despliegue y la infraestructura que lo sostiene.',
+      p2: 'Construí para una fundación una plataforma que reemplazó un proceso manual en papel por un sistema centralizado para manejar su operación diaria. La desarrollé por mi cuenta y me hice cargo del producto entero, desde entender qué necesitaba la organización hasta desplegarlo y mantenerlo en producción. El resultado es un sistema que pasó a formar parte de su trabajo cotidiano y que siguen usando hoy.',
+      p3: 'También desarrollo y opero mi propio SaaS de finanzas, que me dio experiencia más allá de programar la aplicación: autenticación, aislamiento de datos, manejo de sesiones, límite de peticiones, pruebas automatizadas, despliegue y administración del servidor. Construirlo y operarlo yo mismo me enseñó a pensar en cómo se comporta el software en producción, no solo en cómo hacerlo funcionar localmente.',
+      p4: 'Tengo inglés avanzado (C1+) y experiencia con Agile/Scrum. Me importan la arquitectura limpia, el código mantenible y construir software en el que se pueda confiar cuando se usa de verdad.',
       pillars: [
         { big: 'END-TO-END', label: 'De requisitos a producción' },
-        { big: 'EN PRODUCCIÓN', label: 'Apps con usuarios reales hoy' },
+        { big: 'EN PRODUCCIÓN', label: 'Desplegadas y mantenidas por mí' },
         { big: 'TRABAJO EN EQUIPO', label: 'Agile, Scrum y code reviews' },
       ],
     },
@@ -150,6 +159,9 @@ export const translations: Record<Lang, Translations> = {
       label: '05 / CONTACTO',
       heading: 'HABLEMOS',
       cv: 'DESCARGAR CV',
+      nameLabel: 'NOMBRE',
+      emailLabel: 'CORREO',
+      messageLabel: 'MENSAJE',
       namePlaceholder: 'Tu Nombre',
       emailPlaceholder: 'Tu Email',
       messagePlaceholder: 'Contame sobre el puesto o escribime directo',

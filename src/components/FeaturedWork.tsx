@@ -122,8 +122,8 @@ const projects: Project[] = [
     tags: "FULLSTACK / REACT · NODE.JS · POSTGRESQL · SUPABASE",
     url: "https://aulajoven.org",
     desc: {
-      en: "Educational platform for a Costa Rican foundation, built end to end as sole engineer: course management, student enrollment and content delivery across three user roles, over a REST API with JWT authentication and role-based access control. In production with 150 daily active users.",
-      es: "Plataforma educativa para una fundación costarricense, construida de extremo a extremo como ingeniero único: gestión de cursos, matrícula de estudiantes y entrega de contenido con tres roles de usuario, sobre una API REST con autenticación JWT y control de acceso por rol. En producción con 150 usuarios activos diarios.",
+      en: "Educational platform built for a Costa Rican foundation to replace their paper-based workflow. Built end to end, including course management, enrollment, authentication and role-based access for students, teachers and administrators.",
+      es: "Plataforma educativa construida para una fundación costarricense para reemplazar su flujo de trabajo en papel. Hecha de extremo a extremo: gestión de cursos, matrícula, autenticación y acceso por rol para estudiantes, profesores y administradores.",
     },
   },
   {
@@ -135,18 +135,18 @@ const projects: Project[] = [
     chromeLabel: { en: "PUBLISHED ON NPM", es: "PUBLICADO EN NPM" },
     diagram: <DocwizardTerminal />,
     desc: {
-      en: "Open-source CLI published on npm. It scans a project's source code and generates a plain-language end-user guide through the Groq API, turning unstructured technical material into documentation a non-technical reader can actually follow.",
-      es: "CLI open source publicado en npm. Recorre el código fuente de un proyecto y genera una guía de usuario en lenguaje llano a través de la API de Groq, convirtiendo material técnico sin estructura en documentación que un lector no técnico sí puede seguir.",
+      en: "Open-source CLI that turns a codebase into a user-friendly guide. It analyzes the project structure and generates documentation aimed at people who need to use the software, not read its source code.",
+      es: "CLI open source que convierte un código fuente en una guía entendible. Analiza la estructura del proyecto y genera documentación pensada para quien necesita usar el software, no leer su código.",
     },
   },
   {
     num: "03",
-    name: "GEORGE ANGULO FITNESS",
-    tags: "FRONTEND / REACT",
-    url: "https://georgeangulofitness.com",
+    name: "COBBLE LABS",
+    tags: "FRONTEND / NEXT.JS · REACT · TYPESCRIPT · TAILWIND",
+    url: "https://cobble-lab.com",
     desc: {
-      en: "Corporate site for a fitness brand: services, training programs and client contact, with an interactive map and transactional email, delivered with full technical documentation for handoff.",
-      es: "Sitio corporativo para una marca de fitness: servicios, programas de entrenamiento y contacto de clientes, con mapa interactivo y correo transaccional, entregado con documentación técnica completa para el traspaso.",
+      en: "Community tool for a Cobblemon server, combining a Pokédex, team builder and type analysis in one place. Built and deployed independently as a fast, fully static web application.",
+      es: "Herramienta para la comunidad de un servidor de Cobblemon que reúne Pokédex, armador de equipos y análisis de tipos en un solo lugar. Construida y desplegada por mi cuenta como una aplicación web totalmente estática y rápida.",
     },
   },
   {
@@ -155,8 +155,8 @@ const projects: Project[] = [
     tags: "FRONTEND / REACT · TYPESCRIPT",
     url: "https://pypmedia.vercel.app/",
     desc: {
-      en: "Showcase site for a Costa Rican digital-signage company: portfolio, services and contact, with smooth motion throughout. Built solo and deployed on Vercel.",
-      es: "Sitio para una empresa costarricense de cartelería digital: portafolio, servicios y contacto, con animaciones fluidas en todo el recorrido. Construido en solitario y desplegado en Vercel.",
+      en: "Showcase website for a Costa Rican digital-signage company, focused on presenting their services and portfolio through a modern, motion-driven interface. Designed, built and deployed independently.",
+      es: "Sitio para una empresa costarricense de cartelería digital, enfocado en presentar sus servicios y su portafolio con una interfaz moderna y con movimiento. Diseñado, construido y desplegado por mi cuenta.",
     },
   },
   {
@@ -166,8 +166,8 @@ const projects: Project[] = [
     url: "https://cabinance.app",
     image: "/projects/cabinance.png",
     desc: {
-      en: "Personal-finance SaaS I built and operate on my own: budgets, savings goals, recurring payments, gamified achievements and insights computed automatically from user financial data. Next.js over a Python/FastAPI backend and PostgreSQL, 139 automated tests, Dockerized on a self-managed Linux VPS behind Cloudflare.",
-      es: "SaaS de finanzas personales que construí y opero yo solo: presupuestos, metas de ahorro, pagos recurrentes, logros gamificados e insights calculados automáticamente a partir de los datos financieros del usuario. Next.js sobre un backend Python/FastAPI y PostgreSQL, 139 pruebas automatizadas, dockerizado en un VPS Linux autogestionado detrás de Cloudflare.",
+      en: "Personal-finance SaaS for managing budgets, savings and recurring payments. Built and operated end to end, with a focus on user data isolation, authentication, security and reliable deployment.",
+      es: "SaaS de finanzas personales para manejar presupuestos, ahorros y pagos recurrentes. Construido y operado de extremo a extremo, con foco en el aislamiento de datos de cada usuario, la autenticación, la seguridad y un despliegue confiable.",
     },
   },
 ];

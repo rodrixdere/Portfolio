@@ -116,28 +116,6 @@ const tools = [
       { name: "TypeScript", icon: <TextIcon label="TS" /> },
       { name: "JavaScript", icon: <TextIcon label="JS" /> },
       {
-        name: "HTML",
-        icon: (
-          <IconSvg>
-            <path
-              d="M3 2l1.5 17L12 21l7.5-2L21 2H3zm14.5 4H6.5l.3 3.5h10.4l-.5 5-4.2 1.2-4.2-1.2-.3-3h3l.1 1.5 1.4.4 1.4-.4.2-2.2H6.8L6.2 6h11.6l-.3 3.5z"
-              fill="currentColor"
-            />
-          </IconSvg>
-        ),
-      },
-      {
-        name: "CSS",
-        icon: (
-          <IconSvg>
-            <path
-              d="M3 2l1.5 17L12 21l7.5-2L21 2H3zm13 4l-.3 2.5H8.8L9 10h8.3l-.7 6.5-4.6 1.3-4.6-1.3-.3-3.3H9l.2 1.8 2.8.8 2.8-.8.3-3.3H7.8L7 6h9z"
-              fill="currentColor"
-            />
-          </IconSvg>
-        ),
-      },
-      {
         name: "Tailwind CSS",
         icon: (
           <IconSvg>
@@ -262,30 +240,6 @@ const tools = [
         ),
       },
       {
-        name: "Bcrypt",
-        icon: (
-          <IconSvg>
-            <rect
-              x="5"
-              y="11"
-              width="14"
-              height="10"
-              rx="2"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-            />
-            <path
-              d="M8 11V7a4 4 0 018 0v4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-            />
-            <circle cx="12" cy="16" r="1.5" fill="currentColor" />
-          </IconSvg>
-        ),
-      },
-      {
         name: "PostgreSQL",
         icon: (
           <IconSvg>
@@ -346,19 +300,6 @@ const tools = [
         icon: (
           <IconSvg>
             <path d="M13 3L4 14h8l-1 7 9-11h-8l1-7z" fill="currentColor" />
-          </IconSvg>
-        ),
-      },
-      {
-        name: "MongoDB",
-        icon: (
-          <IconSvg>
-            <path
-              d="M12 2C9 2 7 6 7 10c0 3 1.5 5.5 4 7l1 5 1-5c2.5-1.5 4-4 4-7 0-4-2-8-5-8z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-            />
           </IconSvg>
         ),
       },
@@ -548,32 +489,9 @@ const tools = [
           </IconSvg>
         ),
       },
-      {
-        name: "C++",
-        icon: (
-          <IconSvg>
-            <path
-              d="M12 2L3 7v10l9 5 9-5V7L12 2z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-            />
-            <text
-              x="6"
-              y="15.5"
-              fontFamily="monospace"
-              fontWeight="700"
-              fontSize="8"
-              fill="currentColor"
-            >
-              C++
-            </text>
-          </IconSvg>
-        ),
-      },
       { name: "SQL", icon: <TextIcon label="SQL" size={8} /> },
       {
-        name: "Jest",
+        name: "pytest",
         icon: (
           <IconSvg>
             <path
@@ -585,6 +503,28 @@ const tools = [
             />
             <path
               d="M9.5 11.5l1.8 1.8 3.2-3.6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </IconSvg>
+        ),
+      },
+      {
+        name: "Vitest",
+        icon: (
+          <IconSvg>
+            <path
+              d="M12 3l6 4-1.5 9.5a1 1 0 01-.6.8L12 19l-3.9-1.7a1 1 0 01-.6-.8L6 7l6-4z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.3"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M10 9.5l2 5 2-5"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.4"
@@ -624,59 +564,6 @@ const tools = [
               stroke="currentColor"
               strokeWidth="1.3"
               strokeLinecap="round"
-            />
-          </IconSvg>
-        ),
-      },
-      {
-        name: "Postman",
-        icon: (
-          <IconSvg>
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-            />
-            <path
-              d="M8 12h8M14 9l3 3-3 3"
-              stroke="currentColor"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-          </IconSvg>
-        ),
-      },
-      {
-        name: "Jira",
-        icon: (
-          <IconSvg>
-            <path
-              d="M12 2l9 9-4.5 4.5L12 11l-4.5 4.5L3 11l9-9z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.3"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M12 13l4.5 4.5L12 22l-4.5-4.5L12 13z"
-              fill="currentColor"
-              opacity="0.5"
-            />
-          </IconSvg>
-        ),
-      },
-      {
-        name: "VS Code",
-        icon: (
-          <IconSvg>
-            <path
-              d="M17 2L7 13 3 10l-1 1 4.5 4L3 19l1 1 3.5-3L17 22l4-2V4l-4-2zm2 17.5L8.5 12 19 4.5v15z"
-              fill="currentColor"
             />
           </IconSvg>
         ),

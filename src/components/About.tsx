@@ -48,6 +48,7 @@ export default function About() {
             <div className={styles.divider} />
             <p>{t.about.p2}</p>
             <p>{t.about.p3}</p>
+            <p>{t.about.p4}</p>
           </div>
         </div>
 
