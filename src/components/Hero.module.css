@@ -157,22 +157,73 @@
     overflow: visible; /* allow dropdown to show */
   }
 
+  /* El bloque se apoya abajo, sobre el footer: arriba queda el aire para las
+     partículas en vez de un hueco muerto debajo de los botones */
   .nameBlock {
     flex: 0 0 auto;
-    margin-bottom: 28px;
+    margin-top: auto;
+    padding-top: 32px;
+    margin-bottom: 24px;
   }
 
-  /* Desc flows in document */
+  /* "Horvilleur" mide ~3.5em en Barlow Condensed: así llena el ancho útil sin pasarse del margen */
+  .name1,
+  .name2 {
+    font-size: min(calc((100vw - 2 * var(--margin)) / 3.6), 150px);
+  }
+
+  .jobTitle {
+    font-size: clamp(14px, 4vw, 22px);
+    letter-spacing: 3px;
+    margin-top: 12px;
+  }
+
   .desc {
     position: relative;
     bottom: auto;
     right: auto;
-    max-width: 100%;
+    max-width: calc(46ch + 2 * var(--margin));
     padding: 0 var(--margin);
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
-  .footer { margin-top: auto; }
+  .desc p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .descActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .projectLogs,
+  .cvBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 8px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .projectLogs {
+    order: 2;
+    color: #fff;
+    border: 1px solid #555;
+  }
+
+  .projectLogs:active,
+  .cvBtn:active { transform: scale(0.98); }
+
+  .footer { margin-top: 0; }
+}
+
+@media (max-width: 340px) {
+  .descActions { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

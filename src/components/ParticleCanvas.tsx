@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 
 interface Particle {
   ox: number
@@ -17,7 +17,16 @@ const SPRING = 0.06
 const FRICTION = 0.78
 const MAX_PARTICLES = 10000
 
-export default function ParticleCanvas() {
+// En vertical las dos manos no caben con detalle: se dibuja solo la derecha,
+// la del índice extendido (zona de hands.jpg, 1200x675)
+const PORTRAIT_CROP = { x: 660, y: 170, w: 540, h: 250 }
+
+interface Props {
+  // En vertical, las manos se centran en el espacio libre sobre este elemento
+  portraitAnchor?: RefObject<HTMLElement>
+}
+
+export default function ParticleCanvas({ portraitAnchor }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouse = useRef({ x: -9999, y: -9999 })
   const particles = useRef<Particle[]>([])
@@ -84,20 +93,31 @@ export default function ParticleCanvas() {
       off.height = offH
       const oc = off.getContext('2d')!
 
-      const imgAspect = img.naturalWidth / img.naturalHeight
-      const canvasAspect = offW / offH
-      let drawW = offW, drawH = offH, drawX = 0, drawY = 0
-      if (imgAspect > canvasAspect) {
-        drawH = offH; drawW = offH * imgAspect; drawX = (offW - drawW) / 2
+      if (H > W) {
+        const c = PORTRAIT_CROP
+        const drawW = offW
+        const drawH = drawW * (c.h / c.w)
+        const navH = 60 * SCALE
+        const anchorTop = portraitAnchor?.current
+          ? (portraitAnchor.current.getBoundingClientRect().top - canvas!.getBoundingClientRect().top) * SCALE
+          : offH * 0.45
+        const drawY = Math.max(navH, (navH + anchorTop - drawH) / 2)
+        oc.drawImage(img, c.x, c.y, c.w, c.h, (offW - drawW) / 2, drawY, drawW, drawH)
       } else {
-        drawW = offW; drawH = offW / imgAspect; drawY = (offH - drawH) / 2
+        const imgAspect = img.naturalWidth / img.naturalHeight
+        const canvasAspect = offW / offH
+        let drawW = offW, drawH = offH, drawX = 0, drawY = 0
+        if (imgAspect > canvasAspect) {
+          drawH = offH; drawW = offH * imgAspect; drawX = (offW - drawW) / 2
+        } else {
+          drawW = offW; drawH = offW / imgAspect; drawY = (offH - drawH) / 2
+        }
+        oc.drawImage(img, drawX, drawY, drawW, drawH)
       }
-
-      oc.drawImage(img, drawX, drawY, drawW, drawH)
       const data = oc.getImageData(0, 0, offW, offH).data
 
-      // STEP 3 = muestrea más píxeles = más partículas posibles
-      const STEP = 3
+      // Más bajo = más partículas; en vertical el recorte es chico y hace falta más densidad
+      const STEP = H > W ? 2 : 3
 
       for (let y = 0; y < offH; y += STEP) {
         if (particles.current.length >= MAX_PARTICLES) break

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ParticleCanvas from './ParticleCanvas'
 import { useLang } from '../useLang'
 import styles from './Hero.module.css'
@@ -6,6 +6,7 @@ import styles from './Hero.module.css'
 export default function Hero() {
   const { t } = useLang()
   const [time, setTime] = useState('')
+  const nameRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const tick = () => setTime(new Date().toLocaleTimeString('en-US', { hour12: false }))
@@ -16,12 +17,12 @@ export default function Hero() {
 
   return (
     <section className={styles.hero} id="home">
-      <ParticleCanvas />
+      <ParticleCanvas portraitAnchor={nameRef} />
 
       {/* El nav es global y fijo (components/Nav.tsx): acá solo su espacio */}
       <div className={styles.navSpacer} />
 
-      <div className={styles.nameBlock}>
+      <div className={styles.nameBlock} ref={nameRef}>
         <h1>
           <span className={styles.name1}>Rodrigo</span>
           <span className={styles.name2}>Horvilleur</span>

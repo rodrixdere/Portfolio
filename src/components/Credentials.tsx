@@ -14,8 +14,8 @@ const credentials: Credential[] = [
       es: 'BACHILLERATO EN INGENIERÍA EN SOFTWARE',
     },
     detail: {
-      en: 'Universidad Latina de Costa Rica · Graduated 2026',
-      es: 'Universidad Latina de Costa Rica · Graduado 2026',
+      en: 'Universidad Latina de Costa Rica · 2021 - present, final 2 courses',
+      es: 'Universidad Latina de Costa Rica · 2021 - presente, últimos 2 cursos',
     },
   },
   {

@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { useLang } from '../useLang'
 import styles from './About.module.css'
 
@@ -5,11 +6,16 @@ interface GhostIcon {
   top: string
   left?: string
   right?: string
-  svg: string
+  size?: number
+  // En el teléfono no hay hueco para todos: solo se muestran los marcados
+  mobile?: boolean
+  // Un ícono es un SVG inline o una imagen usada como máscara, que toma el color del fantasma
+  svg?: string
+  mask?: string
 }
 
 const ghostIcons: GhostIcon[] = [
-  { top: '5%', left: '3%', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="50" rx="48" ry="18" fill="none" stroke="currentColor" stroke-width="5"/><ellipse cx="50" cy="50" rx="48" ry="18" fill="none" stroke="currentColor" stroke-width="5" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="48" ry="18" fill="none" stroke="currentColor" stroke-width="5" transform="rotate(120 50 50)"/><circle cx="50" cy="50" r="7" fill="currentColor"/></svg>` },
+  { top: '5%', left: '3%', size: 110, mask: '/sun-ink.png', mobile: true },
   { top: '2%', right: '30%', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="90" height="90" rx="8" fill="currentColor" opacity="0.15"/><rect x="5" y="5" width="90" height="90" rx="8" fill="none" stroke="currentColor" stroke-width="5"/><text x="12" y="72" font-family="monospace" font-weight="900" font-size="52" fill="currentColor">TS</text></svg>` },
   { top: '15%', right: '8%', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="20" r="10" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="30" cy="80" r="10" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="70" cy="40" r="10" fill="none" stroke="currentColor" stroke-width="6"/><line x1="30" y1="30" x2="30" y2="70" stroke="currentColor" stroke-width="6"/><path d="M30 30 Q30 40 70 40" fill="none" stroke="currentColor" stroke-width="6"/></svg>` },
   { top: '60%', right: '6%', svg: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="30" width="15" height="12" rx="2" fill="currentColor"/><rect x="28" y="30" width="15" height="12" rx="2" fill="currentColor"/><rect x="46" y="30" width="15" height="12" rx="2" fill="currentColor"/><rect x="28" y="16" width="15" height="12" rx="2" fill="currentColor"/><rect x="46" y="16" width="15" height="12" rx="2" fill="currentColor"/><path d="M5 44 Q50 44 80 44 Q95 44 90 58 Q85 68 70 66 Q65 75 50 72 Q20 75 10 60 Q2 55 5 44Z" fill="none" stroke="currentColor" stroke-width="5"/></svg>` },
@@ -28,9 +34,23 @@ export default function About() {
         {ghostIcons.map((g, i) => (
           <span
             key={i}
-            className={styles.ghost}
-            style={{ top: g.top, left: g.left, right: g.right }}
-            dangerouslySetInnerHTML={{ __html: g.svg }}
+            className={g.mobile ? `${styles.ghost} ${styles.ghostMobile}` : styles.ghost}
+            style={{
+              '--top': g.top,
+              '--left': g.left ?? 'auto',
+              '--right': g.right ?? 'auto',
+              '--size': `${g.size ?? 80}px`,
+              ...(g.mask && {
+                background: 'currentColor',
+                maskImage: `url(${g.mask})`,
+                WebkitMaskImage: `url(${g.mask})`,
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat',
+              }),
+            } as CSSProperties}
+            dangerouslySetInnerHTML={g.svg ? { __html: g.svg } : undefined}
           />
         ))}
       </div>
@@ -48,7 +68,6 @@ export default function About() {
             <div className={styles.divider} />
             <p>{t.about.p2}</p>
             <p>{t.about.p3}</p>
-            <p>{t.about.p4}</p>
           </div>
         </div>
 

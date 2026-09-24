@@ -122,8 +122,11 @@
 
 .ghost {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  top: var(--top);
+  left: var(--left);
+  right: var(--right);
+  width: var(--size);
+  height: var(--size);
   opacity: 0.06;
   user-select: none;
   color: #000;
@@ -154,6 +157,19 @@
 @media (max-width: 600px) {
   .about {
     padding: 40px var(--margin) 60px;
+  }
+
+  /* En el teléfono el texto ocupa todo el ancho: los fantasmas quedaban
+     encima del título y los párrafos. Solo queda el marcado, en la esquina */
+  .ghost { display: none; }
+
+  .ghostMobile {
+    display: block;
+    top: 44px;
+    left: auto;
+    right: -22px;
+    width: 130px;
+    height: 130px;
   }
 
   .grid {
